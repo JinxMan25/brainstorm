@@ -114,20 +114,27 @@ function tick() {
   node
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
-
+var lock = false;
 function mouseover() {
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
       .attr("r", 30);
 }
+function click(){
+  d3.select(this).select("circle").transition()
+    .ease("elastic")
+    .duration(3000)
+    .attr("r", 100);
+  lock = true;
+}
 
 function mouseout() {
+  if(lock == true){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
-      .attr("r", 16)
-      mouseover();
-        }
+      .attr("r", 16);
+  }}
 
 </script>
