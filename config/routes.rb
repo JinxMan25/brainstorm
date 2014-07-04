@@ -1,4 +1,6 @@
 Brainstorm::Application.routes.draw do
+  get "test/force"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
