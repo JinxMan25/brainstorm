@@ -117,7 +117,7 @@ function tick() {
 
 function mouseover() {
   
-  if( d3.select(this).select("circle").attr("r") != 100){
+  if( d3.select(this).select("circle").attr("r") != 250){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -132,11 +132,11 @@ function click(){
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(500)
-    .attr("r", 400);
+    .attr("r", 250);
 }
 
 function mouseout() {
-  if( d3.select(this).select("circle").attr("r") != 100){
+  if( d3.select(this).select("circle").attr("r") != 250){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
