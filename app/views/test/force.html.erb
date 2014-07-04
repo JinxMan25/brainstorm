@@ -91,8 +91,8 @@ var node = svg.selectAll(".node")
     .data(force.nodes())
   .enter().append("g")
     .attr("class", "node")
-    //.on("mouseover", mouseover)
-    //.on("mouseout", mouseout)
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
     .call(force.drag)
     .on("click", click);
 
@@ -116,7 +116,8 @@ function tick() {
 }
 
 function mouseover() {
-  if(lock == false){
+  
+  if( d3.select(this).select("circle").attr("r") != 100){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -130,16 +131,16 @@ function click(){
     .attr("r",15);
   d3.select(this).select("circle").transition()
     .ease("elastic")
-    .duration(3000)
-    .attr("r", 100);
+    .duration(500)
+    .attr("r", 400);
 }
 
 function mouseout() {
-  if( this.attr(r) != 100){
+  if( d3.select(this).select("circle").attr("r") != 100){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
-      .attr("r", 16);
+      .attr("r", 15);
   }
   }
 
