@@ -11,8 +11,6 @@
 
 .node circle {
   fill: #ccc;
-  stroke: #fff;
-  stroke-width: 1.5px;
 }
 
 text {
@@ -97,11 +95,13 @@ var node = svg.selectAll(".node")
     .on("click", click);
 
 node.append("circle")
-    .attr("r", 15);
+    .attr("r", 15)
+    .attr("fill","grey")
+    .attr("stroke","black")
+    .attr("stroke-width",1.5);
 
 node.append("text")
-    .attr("x", 12)
-    .attr("dy", ".35em")
+    .attr("text-anchor", "middle")
     .text(function(d) { return d.name; });
 
 function tick() {
@@ -115,19 +115,47 @@ function tick() {
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
+
+
 function mouseover() {
+  
+  if( d3.select(this).select("circle").attr("r") < 40){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
       .attr("r", 30);
+  }
+}
+function click(){
+  if( d3.select(this).select("circle").attr("r") > 41 ){
+    d3.select(this).select("circle").transition()
+      .ease("elastic")
+      .duration(1000)
+      .attr("r",15)
+      .attr("stroke","black")
+      .attr("stroke-width",1.5);
+      
+  } else {
+  d3.selectAll("circle").transition()
+    .duration(1000)
+    .attr("r",15)
+    .attr("stroke-width", 1.5)
+    .attr("stroke", "black");
+  d3.select(this).select("circle").transition()
+    .ease("elastic")
+    .duration(2500)
+    .attr("r", 250)
+    .attr("stroke-width", 10)
+    .attr("stroke", "purple");
+  }
 }
 
 function mouseout() {
+  if( d3.select(this).select("circle").attr("r") < 35){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
-      .attr("r", 16)
-      mouseover();
-        }
-
+      .attr("r", 15);
+  }
+  }
 </script>
