@@ -125,14 +125,20 @@ function mouseover() {
   }
 }
 function click(){
-  
+  if( d3.select(this).select("circle").attr("r") == 250){
+    d3.select(this).select("circle").transition()
+      .ease("elastic")
+      .duration(1000)
+      .attr("r",15);
+  } else {
   d3.selectAll("circle").transition()
     .duration(1000)
     .attr("r",15);
   d3.select(this).select("circle").transition()
     .ease("elastic")
-    .duration(500)
+    .duration(1000)
     .attr("r", 250);
+  }
 }
 
 function mouseout() {
