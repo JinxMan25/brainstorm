@@ -91,8 +91,8 @@ var node = svg.selectAll(".node")
     .data(force.nodes())
   .enter().append("g")
     .attr("class", "node")
-    .on("mouseover", mouseover)
-    .on("mouseout", mouseout)
+    //.on("mouseover", mouseover)
+    //.on("mouseout", mouseout)
     .call(force.drag)
     .on("click", click);
 
@@ -114,27 +114,33 @@ function tick() {
   node
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
-var lock = false;
+
 function mouseover() {
+  if(lock == false){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
       .attr("r", 30);
+  }
 }
 function click(){
+  
+  d3.selectAll("circle").transition()
+    .duration(1000)
+    .attr("r",15);
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(3000)
     .attr("r", 100);
-  lock = true;
 }
 
 function mouseout() {
-  if(lock == true){
+  if( this.attr(r) != 100){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
       .attr("r", 16);
-  }}
+  }
+  }
 
 </script>
