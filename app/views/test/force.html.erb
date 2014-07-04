@@ -121,6 +121,12 @@ function mouseover() {
       .duration(1000)
       .attr("r", 30);
 }
+function click(){
+  d3.select(this).select("circle").transition()
+    .ease("elastic")
+    .duraction(3000)
+    .attr("r",100);
+}
 
 function mouseout() {
   d3.select(this).select("circle").transition()
