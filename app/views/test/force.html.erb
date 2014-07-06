@@ -77,6 +77,13 @@ var force = d3.layout.force()
     .charge(-300)
     .on("tick", tick)
     .start();
+d3.select("body")
+.on("click",function(){ if (d3.each("circle").attr("r") > 250){
+    d3.selectAll("circle")
+      .transition()
+      .attr("r",15);
+      }
+    });
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -115,6 +122,8 @@ function tick() {
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
+
+
 function mouseover() {
   
   if( d3.select(this).select("circle").attr("r") != 250){
@@ -125,7 +134,7 @@ function mouseover() {
   }
 }
 function click(){
-  if( d3.select(this).select("circle").attr("r") == 250){
+  if( d3.select(this).select("circle").attr("r") > 41 ){
     d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -142,12 +151,11 @@ function click(){
 }
 
 function mouseout() {
-  if( d3.select(this).select("circle").attr("r") != 250){
+  if( d3.select(this).select("circle").attr("r") < 35){
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
       .attr("r", 15);
   }
   }
-
 </script>
