@@ -97,7 +97,7 @@ var node = svg.selectAll(".node")
 node.append("circle")
     .attr("r", 15)
     .attr("fill","grey")
-    .attr("stroke","purple)
+    .attr("stroke","purple")
     .attr("stroke-width",1.5);
 
 node.append("text")
@@ -141,8 +141,9 @@ function click(){
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(1000)
-    .attr("r", 250);
-    
+    .attr("r", 250)
+    .attr("stroke-width", 10)
+    .attr("stroke", "red");
   }
 }
 
