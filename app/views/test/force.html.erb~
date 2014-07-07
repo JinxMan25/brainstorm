@@ -133,8 +133,7 @@ function click(){
       .ease("elastic")
       .duration(1000)
       .attr("r",15)
-      .attr("stroke-width", "10")
-      .attr("stroke", "black");
+      
   } else {
   d3.selectAll("circle").transition()
     .duration(1000)
@@ -143,6 +142,7 @@ function click(){
     .ease("elastic")
     .duration(1000)
     .attr("r", 250);
+    
   }
 }
 
