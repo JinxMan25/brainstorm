@@ -9,6 +9,10 @@
   stroke-width: 1.5px;
 }
 
+text{
+  font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .node circle {
   fill: #ccc;
 }
@@ -101,7 +105,8 @@ node.append("circle")
 node.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.name; })
-    .style("font-size", function() { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 24)return d.scale + "px"; });
+    .attr("dy", ".20em")
+    .style("font-size", function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; });
 
 function tick() {
   link
