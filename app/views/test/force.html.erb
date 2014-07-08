@@ -14,7 +14,6 @@
 }
 
 text {
-  font: 10px sans-serif;
   pointer-events: none;
 }
 
@@ -102,7 +101,10 @@ node.append("circle")
 
 node.append("text")
     .attr("text-anchor", "middle")
-    .text(function(d) { return d.name; });
+    .attr("font-size", "1px")
+    .text(function(d) { return d.name; })
+    .each(getSize)
+    .style("font-size", function(d) { return d.scale + "px"; });
 
 function tick() {
   link
@@ -116,16 +118,13 @@ function tick() {
 }
 
 
-
-
-
 function mouseover() {
   
   if( d3.select(this).select("circle").attr("r") < 40){
-  d3.select(this).select("text").transition()
-    .style("font-size",22)
-    .ease("elastic")
-    .duration(750);
+  //d3.select(this).select("text").transition()
+    //.style("font-size",22)
+    //.ease("elastic")
+    //.duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -158,14 +157,20 @@ function click(){
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 35){
-  d3.select(this).select("text").transition()
-    .style("font-size",12)
-    .ease("elastic")
-    .duration(750);
+  //d3.select(this).select("text").transition()
+    //.style("font-size",12)
+    //.ease("elastic")
+    //.duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
       .attr("r", 15);
   }
   }
+function getSize(d){
+  var bbox = this.getBBox(),
+      cbbox = this.parentNode.getBBox(),
+      scale = Math.min(cbbox.width/bbox.width, cbbox.height/bbox.height);
+  d.scale = scale;
+}
 </script>
