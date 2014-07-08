@@ -92,8 +92,7 @@ var node = svg.selectAll(".node")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
     .call(force.drag)
-    .on("click", click)
-    .on("dblclick", dbclick);
+    .on("click", click);
 
 node.append("circle")
     .attr("r", 15)
@@ -118,17 +117,15 @@ function tick() {
 
 
 
-function dbclick(){
-d3.select(this).append("circle").transition()
-  .attr("r",15)
-  .attr("fill","grey")
-  .attr("stroke","black")
-  .attr("stroke-width",1.5);
-    }
+
 
 function mouseover() {
   
   if( d3.select(this).select("circle").attr("r") < 40){
+  d3.select(this).select("text").transition()
+    .style("font-size",22)
+    .ease("elastic")
+    .duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -161,6 +158,10 @@ function click(){
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 35){
+  d3.select(this).select("text").transition()
+    .style("font-size",12)
+    .ease("elastic")
+    .duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
