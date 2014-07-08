@@ -10,7 +10,7 @@
 }
 
 text{
-  font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .node circle {
@@ -122,10 +122,10 @@ function tick() {
 function mouseover() {
   
   if( d3.select(this).select("circle").attr("r") < 30){
-  //d3.select(this).select("text").transition()
-    //.style("font-size",22)
-    //.ease("elastic")
-    //.duration(750);
+  d3.select(this).select("text").transition()
+    .style("font-size",function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; })
+    .ease("elastic")
+    .duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -158,10 +158,10 @@ function click(){
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 100){
-  //d3.select(this).select("text").transition()
-    //.style("font-size",12)
-    //.ease("elastic")
-    //.duration(750);
+  d3.select(this).select("text").transition()
+    .style("font-size",function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; })
+    .ease("elastic")
+    .duration(750);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
