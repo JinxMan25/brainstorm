@@ -32,7 +32,6 @@ var links = [
   {source: "Kodak", target: "Apple", type: "suit"},
   {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
   {source: "Microsoft", target: "Foxconn", type: "suit"},
-  {source: "Oracle", target: "Google", type: "suit"},
   {source: "Apple", target: "HTC", type: "suit"},
   {source: "Microsoft", target: "Inventec", type: "suit"},
   {source: "Samsung", target: "Kodak", type: "resolved"},
@@ -47,7 +46,7 @@ var links = [
   {source: "Apple", target: "Motorola", type: "suit"},
   {source: "Microsoft", target: "Motorola", type: "suit"},
   {source: "Motorola", target: "Microsoft", type: "suit"},
-  {source: "Huawei", target: "ZTE", type: "suit"},
+  {source: "Huawei", target: "ZTE"},
   {source: "Ericsson", target: "ZTE", type: "suit"},
   {source: "Kodak", target: "Samsung", type: "resolved"},
   {source: "Apple", target: "Samsung", type: "suit"},
@@ -71,7 +70,7 @@ var force = d3.layout.force()
     .links(links)
     .size([width, height])
     .linkDistance(100)
-    .charge(-300)
+    .charge(-800)
     .on("tick", tick)
     .start();
 
@@ -94,10 +93,10 @@ var node = svg.selectAll(".node")
     .on("click", click);
 
 node.append("circle")
-    .attr("r", 15)
+    .attr("r", 28)
     .attr("fill","grey")
     .attr("stroke","black")
-    .attr("stroke-width",1.5);
+    .attr("stroke-width",3);
 
 node.append("text")
     .attr("text-anchor", "middle")
@@ -120,7 +119,7 @@ function tick() {
 
 function mouseover() {
   
-  if( d3.select(this).select("circle").attr("r") < 40){
+  if( d3.select(this).select("circle").attr("r") < 30){
   //d3.select(this).select("text").transition()
     //.style("font-size",22)
     //.ease("elastic")
@@ -128,22 +127,22 @@ function mouseover() {
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
-      .attr("r", 30);
+      .attr("r", 80);
   }
 }
 function click(){
-  if( d3.select(this).select("circle").attr("r") > 41 ){
+  if( d3.select(this).select("circle").attr("r") > 100 ){
     d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
-      .attr("r",15)
+      .attr("r",28)
       .attr("stroke","black")
       .attr("stroke-width",1.5);
       
   } else {
   d3.selectAll("circle").transition()
     .duration(1000)
-    .attr("r",15)
+    .attr("r",28)
     .attr("stroke-width", 1.5)
     .attr("stroke", "black");
   d3.select(this).select("circle").transition()
@@ -156,7 +155,7 @@ function click(){
 }
 
 function mouseout() {
-  if( d3.select(this).select("circle").attr("r") < 35){
+  if( d3.select(this).select("circle").attr("r") < 100){
   //d3.select(this).select("text").transition()
     //.style("font-size",12)
     //.ease("elastic")
@@ -164,7 +163,7 @@ function mouseout() {
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
-      .attr("r", 15);
+      .attr("r", 28);
   }
   }
 function getSize(d){
