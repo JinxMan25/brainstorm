@@ -96,14 +96,12 @@ node.append("circle")
     .attr("r", 28)
     .attr("fill","grey")
     .attr("stroke","black")
-    .attr("stroke-width",3);
+    .attr("stroke-width",1.5);
 
 node.append("text")
     .attr("text-anchor", "middle")
-    .attr("font-size", "1px")
     .text(function(d) { return d.name; })
-    .each(getSize)
-    .style("font-size", function(d) { return d.scale + "px"; });
+    .style("font-size", function() { return Math.min(2 * d.r, (2 * d.r - 8) / this.getComputedTextLength() * 24)return d.scale + "px"; });
 
 function tick() {
   link
