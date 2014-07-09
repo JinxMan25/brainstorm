@@ -92,7 +92,8 @@ var node = svg.selectAll(".node")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
     .call(force.drag)
-    .on("click", click);
+    .on("click", click)
+    .on("dblclick", dbclick);
 
 node.append("circle")
     .attr("r", 15)
@@ -118,7 +119,13 @@ function tick() {
 
 
 function dbclick(){
-}
+d3.select(this).append("circle").transition()
+  .attr("r",15)
+  .attr("fill","grey")
+  .attr("stroke","black")
+  .attr("stroke-width",1.5);
+
+    }
 
 function mouseover() {
   
