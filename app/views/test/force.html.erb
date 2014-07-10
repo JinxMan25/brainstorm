@@ -23,7 +23,10 @@ position:absolute;
 border: 1px solid;
 margin: 0px auto;
 display:block;
-margin-top:170px;
+margin-top:-384px;
+margin-left:-512px;
+top:50%;
+left:50%;
 }
 
 text {
@@ -75,8 +78,8 @@ links.forEach(function(link) {
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
 
-var width = 640,
-    height = 320;
+var width = 1024,
+    height = 720;
 
 var force = d3.layout.force()
     .nodes(d3.values(nodes))
