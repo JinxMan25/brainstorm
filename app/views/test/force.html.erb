@@ -10,7 +10,7 @@
 }
 
 text{
-  font: 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .node circle {
@@ -66,8 +66,8 @@ links.forEach(function(link) {
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
 
-var width = 1980,
-    height = 1080;
+var width = 640,
+    height = 320;
 
 var force = d3.layout.force()
     .nodes(d3.values(nodes))
@@ -79,8 +79,8 @@ var force = d3.layout.force()
     .start();
 
 var svg = d3.select("body").append("svg")
-    .attr("viewBox", "0 0 " + width + " " + height )
-    .attr("preserveAspectRatio", "xMidYMid meet");
+    .attr("height", height)
+    .attr("width", width);
 var link = svg.selectAll(".link")
     .data(force.links())
   .enter().append("line")
@@ -105,7 +105,8 @@ node.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.name; })
     .attr("dy", ".20em")
-    .style("font-size", function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; });
+    .attr("font-size",12);
+
 
 function tick() {
   link
@@ -123,9 +124,9 @@ function mouseover() {
   
   if( d3.select(this).select("circle").attr("r") < 30){
   d3.select(this).select("text").transition()
-    .style("font-size",function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; })
+    .style("font-size","25px")
     .ease("elastic")
-    .duration(750);
+    .duration(1000);
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
@@ -140,6 +141,11 @@ function click(){
       .attr("r",28)
       .attr("stroke","black")
       .attr("stroke-width",1.5);
+    d3.select(this).select("text").transition()
+      .ease("elastic")
+      .duration(1000)
+      .style("font-size", "15px")
+      .attr("dy", ".20em");
       
   } else {
   d3.selectAll("circle").transition()
@@ -147,19 +153,31 @@ function click(){
     .attr("r",28)
     .attr("stroke-width", 1.5)
     .attr("stroke", "black");
+  d3.selectAll("text").transition()
+    .duration(1000)
+    .style("font-size", "15px")
+    .ease("elastic")
+    .attr("dy",".20em");
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(2500)
     .attr("r", 250)
+    .style("z-index","200")
     .attr("stroke-width", 10)
     .attr("stroke", "purple");
+  d3.select(this).select("text").transition()
+    .duration(2500)
+    .style("font-size", "72px")
+    .ease("elastic")
+    .attr("dy", "-100px");
+
   }
 }
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 100){
   d3.select(this).select("text").transition()
-    .style("font-size",function() { return Math.min(2 * 20, (2 * 20 - 8) / this.getComputedTextLength() * 24) + "px"; })
+    .style("font-size", "15px")
     .ease("elastic")
     .duration(750);
   d3.select(this).select("circle").transition()
@@ -168,10 +186,5 @@ function mouseout() {
       .attr("r", 28);
   }
   }
-function getSize(d){
-  var bbox = this.getBBox(),
-      cbbox = this.parentNode.getBBox(),
-      scale = Math.min(cbbox.width/bbox.width, cbbox.height/bbox.height);
-  d.scale = scale;
-}
+
 </script>
