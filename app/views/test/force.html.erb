@@ -148,12 +148,11 @@ function mouseover() {
 function click(){
   if( d3.select(this).select("circle").attr("r") > 100 ){
     d3.select(this).select("circle").transition()
-      .ease("elastic")
       .duration(1000)
       .attr("r",28)
       .attr("stroke","black")
       .attr("stroke-width",1.5);
-    d3.select(this).select("text").transition()
+    d3.selectAll("text").transition()
       .ease("elastic")
       .duration(1000)
       .style("font-size", "15px")
