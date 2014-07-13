@@ -1,3 +1,38 @@
 // Place all the styles related to the test controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body{
+  color:red;
+}
+
+.link
+  fill: none
+  stroke: #666
+  stroke-width: 1.5px
+
+text{
+  font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.node circle {
+  fill: #ccc;
+}
+
+
+svg{
+position:absolute;
+box-shadow: 0 4px 0.5px grey, 0 -4px 0.5px grey; 
+margin: 0px auto;
+display:block;
+margin-top:-300px;
+margin-left:-450px;
+top:50%;
+left:50%;
+}
+
+text {
+  pointer-events: none;
+}
+
+
+

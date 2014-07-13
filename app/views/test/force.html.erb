@@ -1,73 +1,45 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <script src="http://d3js.org/d3.v2.js?2.9.1"></script>
-<style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-.link {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1.5px;
-}
-
-text{
-  font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.node circle {
-  fill: #ccc;
-}
-
-
-svg{
-position:absolute;
-box-shadow: 0 4px 0.5px grey, 0 -4px 0.5px grey; 
-margin: 0px auto;
-display:block;
-margin-top:-300px;
-margin-left:-450px;
-top:50%;
-left:50%;
-}
-
-text {
-  pointer-events: none;
-}
-
-</style>
 <body>
+<div id="addnode">
+
+</div>
 <script>
 
-// http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
+// http://blog.thomsonreuters.com/index.php/mobile-patent-s-graphic-of-the-day/
 var links = [
-  {source: "Microsoft", target: "Amazon", type: "licensing"},
-  {source: "Microsoft", target: "HTC", type: "licensing"},
-  {source: "Samsung", target: "Apple", type: "suit"},
-  {source: "Motorola", target: "Apple", type: "suit"},
-  {source: "Nokia", target: "Apple", type: "resolved"},
-  {source: "HTC", target: "Apple", type: "suit"},
-  {source: "Kodak", target: "Apple", type: "suit"},
-  {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
-  {source: "Microsoft", target: "Foxconn", type: "suit"},
-  {source: "Apple", target: "HTC", type: "suit"},
-  {source: "Microsoft", target: "Inventec", type: "suit"},
-  {source: "Samsung", target: "Kodak", type: "resolved"},
-  {source: "LG", target: "Kodak", type: "resolved"},
-  {source: "RIM", target: "Kodak", type: "suit"},
-  {source: "Sony", target: "LG", type: "suit"},
-  {source: "Kodak", target: "LG", type: "resolved"},
-  {source: "Apple", target: "Nokia", type: "resolved"},
-  {source: "Qualcomm", target: "Nokia", type: "resolved"},
-  {source: "MyTime", target: "Android", type:"suit"},
-  {source: "MyTime", target: "IOS", type:"suit"},
-  {source: "Apple", target: "Motorola", type: "suit"},
-  {source: "Microsoft", target: "Motorola", type: "suit"},
-  {source: "Motorola", target: "Microsoft", type: "suit"},
-  {source: "Huawei", target: "ZTE"},
-  {source: "Ericsson", target: "ZTE", type: "suit"},
-  {source: "Kodak", target: "Samsung", type: "resolved"},
-  {source: "Apple", target: "Samsung", type: "suit"},
-  {source: "Kodak", target: "RIM", type: "suit"},
-  {source: "Nokia", target: "Qualcomm", type: "suit"}
+  {"source": "Microsoft", "target": "Amazon", "type": "1"},
+  {"source": "Microsoft", "target": "HTC", "type": "2"},
+  {"source": "Samsung", "target": "Apple", "type": "3"},
+  {"source": "Motorola", "target": "Apple", "type": "4"},
+  {"source": "Nokia", "target": "Apple", "type": "5"},
+  {"source": "HTC", "target": "Apple", "type": "6"},
+  {"source": "Kodak", "target": "Apple", "type": "7"},
+  {"source": "Microsoft", "target": "Barnes & Noble", "type": "8"},
+  {"source": "Microsoft", "target": "Foxconn", "type": "9"},
+  {"source": "Apple", "target": "HTC", "type": "10"},
+  {"source": "Microsoft", "target": "Inventec", "type": "11"},
+  {"source": "Samsung", "target": "Kodak", "type": "12"},
+  {"source": "LG", "target": "Kodak", "type": "13"},
+  {"source": "RIM", "target": "Kodak", "type": "14"},
+  {"source": "Sony", "target": "LG", "type": "15"},
+  {"source": "Kodak", "target": "LG", "type": "16"},
+  {"source": "Apple", "target": "Nokia", "type": "17"},
+  {"source": "Qualcomm", "target": "Nokia", "type": "18"},
+  {"source": "MyTime", "target": "Android", "type":"19"},
+  {"source": "MyTime", "target": "IOS", "type":"20"},
+  {"source": "Apple", "target": "Motorola", "type": "21"},
+  {"source": "Microsoft", "target": "Motorola", "type": "22"},
+  {"source": "Motorola", "target": "Microsoft", "type": "23"},
+  {"source": "Huawei", "target": "ZTE", "type": "24"},
+  {"source": "Ericsson", "target": "ZTE", "type": "25"},
+  {"source": "Kodak", "target": "Samsung", "type": "26"},
+  {"source": "Apple", "target": "Samsung", "type": "27"},
+  {"source": "Kodak", "target": "RIM", "type": "28"},
+  {"source": "Nokia", "target": "Qualcomm", "type": "29"}
 ];
 
 var nodes = {};
@@ -85,7 +57,7 @@ var force = d3.layout.force()
     .nodes(d3.values(nodes))
     .links(links)
     .size([width, height])
-    .linkDistance(100)
+    .linkDistance(150)
     .charge(-600)
     .on("tick", tick)
     .start();
@@ -106,18 +78,51 @@ var node = svg.selectAll(".node")
     .on("mouseout", mouseout)
     .call(force.drag)
     .on("click", click);
+    
 
 node.append("circle")
-    .attr("r", 28)
+.attr("r", function(d){
+    if (d.weight == "1"){
+    return 28;
+    }else if (d.weight == "2"){
+    return 17.5 * d.weight;
+    }else if (d.weight == "3"){
+      return 13 * d.weight;
+    }else if (d.weight == "4"){
+      return 11 * d.weight;
+    }else if (d.weight == "5"){
+      return 10* d.weight;
+    }else if (d.weight == "6"){
+      return 7 * d.weight;
+    }else if (d.weight >= "7"){
+      return 6.5 * d.weight;
+    }
+      })
     .attr("fill","grey")
     .attr("stroke","black")
-    .attr("stroke-width",1.5);
+    .attr("stroke-width",1.5)
+    .attr("data-id", function(d){
+        return d.index;
+        })
+    .attr("data-name", function(d){
+        return d.name;
+        });
 
 node.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.name; })
     .attr("dy", ".20em")
     .attr("font-size",12);
+
+
+  //$("circle").click(function(){
+    //  alert ($(this).data("name"));
+      //});
+  
+$("circle").dblclick(function(){
+    var source = ($(this).data("name"));
+    $("#addnode").toggleClass('translate');  
+      });
 
 
 function tick() {
@@ -131,10 +136,9 @@ function tick() {
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
-
 function mouseover() {
   
-  if( d3.select(this).select("circle").attr("r") < 30){
+  if( d3.select(this).select("circle").attr("r") < 300){
   d3.select(this).select("text").transition()
     .style("font-size","25px")
     .ease("elastic")
@@ -142,7 +146,23 @@ function mouseover() {
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(1000)
-      .attr("r", 80);
+      .attr("r",function(d){
+if (d.weight == "1"){
+    return 28*2;
+    }else if (d.weight == "2"){
+    return 17.5 * d.weight * 2;
+    }else if (d.weight == "3"){
+      return 13 * d.weight*2;
+    }else if (d.weight == "4"){
+      return 11 * d.weight*2;
+    }else if (d.weight == "5"){
+      return 10* d.weight*2;
+    }else if (d.weight == "6"){
+      return 7 * d.weight*2;
+    }else if (d.weight >= "7"){
+      return 7 * d.weight*2;
+    }
+});
   }
 }
 function click(){
@@ -186,7 +206,7 @@ function click(){
 }
 
 function mouseout() {
-  if( d3.select(this).select("circle").attr("r") < 100){
+  if( d3.select(this).select("circle").attr("r") < 120){
   d3.select(this).select("text").transition()
     .style("font-size", "15px")
     .ease("elastic")
@@ -194,7 +214,23 @@ function mouseout() {
   d3.select(this).select("circle").transition()
       .ease("elastic")
       .duration(750)
-      .attr("r", 28);
+      .attr("r",function(d){
+if (d.weight == "1"){
+    return 28;
+    }else if (d.weight == "2"){
+    return 17.5 * d.weight;
+    }else if (d.weight == "3"){
+      return 13 * d.weight;
+    }else if (d.weight == "4"){
+      return 11 * d.weight;
+    }else if (d.weight == "5"){
+      return 10* d.weight;
+    }else if (d.weight == "6"){
+      return 7 * d.weight;
+    }else if (d.weight >= "7"){
+      return 6.5 * d.weight;
+    }
+});
   }
   }
 
