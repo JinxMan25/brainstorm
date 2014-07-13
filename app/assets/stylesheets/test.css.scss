@@ -34,5 +34,16 @@ text {
   pointer-events: none;
 }
 
+#addnode.translate{
+-webkit-transform:translateX(-15px);
+transform:translateX(-15px);
+opacity:1.0;
+}
 
+#addnode{
+display:block;
+position:absolute;
+margin:0px auto;
+
+}
 
