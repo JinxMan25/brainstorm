@@ -138,7 +138,7 @@ function tick() {
 
 function mouseover() {
   
-  if( d3.select(this).select("circle").attr("r") < 300){
+  if( d3.select(this).select("circle").attr("r") < 100){
   d3.select(this).select("text").transition()
     .style("font-size","25px")
     .ease("elastic")
@@ -201,7 +201,7 @@ function click(){
     .attr("stroke-width", 1.5)
     .attr("stroke", "black");
   d3.selectAll("text").transition()
-    .duration(1000)
+    .duration(750)
     .style("font-size", "15px")
     .ease("elastic")
     .attr("dy",".20em");
@@ -222,7 +222,7 @@ function click(){
 }
 
 function mouseout() {
-  if( d3.select(this).select("circle").attr("r") < 120){
+  if( d3.select(this).select("circle").attr("r") < 90){
   d3.select(this).select("text").transition()
     .style("font-size", "15px")
     .ease("elastic")
