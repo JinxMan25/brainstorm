@@ -181,7 +181,23 @@ function click(){
   } else {
   d3.selectAll("circle").transition()
     .duration(1000)
-    .attr("r",28)
+    .attr("r", function(d){
+    if (d.weight == "1"){
+    return 28;
+    }else if (d.weight == "2"){
+    return 17.5 * d.weight;
+    }else if (d.weight == "3"){
+      return 13 * d.weight;
+    }else if (d.weight == "4"){
+      return 11 * d.weight;
+    }else if (d.weight == "5"){
+      return 10* d.weight;
+    }else if (d.weight == "6"){
+      return 7 * d.weight;
+    }else if (d.weight >= "7"){
+      return 6.5 * d.weight;
+    }
+      })
     .attr("stroke-width", 1.5)
     .attr("stroke", "black");
   d3.selectAll("text").transition()
