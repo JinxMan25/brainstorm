@@ -1,3 +1,10 @@
+= vendor-prefix($name, $style)
+  -web-kit-#{$name}: #{$style}
+  -ms-#{$name}: #{$style}
+  -moz-#{$name}: #{$style}
+  -o-#{$name}: #{$style}
+  #{$name}: #{$style}
+
 .link
   fill: none
   stroke: #666
