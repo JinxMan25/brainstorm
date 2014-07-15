@@ -75,6 +75,7 @@ var node = svg.selectAll(".node")
   .enter().append("g")
     .attr("class", "node")
     .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
     .call(force.drag)
     .on("click", click);
     
@@ -149,20 +150,19 @@ function mouseover() {
 if (d.weight == "1"){
     return 28*2;
     }else if (d.weight == "2"){
-    return 17.5 * d.weight * 2;
+    return 17.5 * d.weight * 1.5;
     }else if (d.weight == "3"){
-      return 13 * d.weight*2;
+      return 13 * d.weight*1.5;
     }else if (d.weight == "4"){
-      return 11 * d.weight*2;
+      return 11 * d.weight*1.5;
     }else if (d.weight == "5"){
-      return 10* d.weight*2;
+      return 10* d.weight*1.5;
     }else if (d.weight == "6"){
-      return 7 * d.weight*2;
+      return 7 * d.weight*1.5;
     }else if (d.weight >= "7"){
-      return 7 * d.weight*2;
+      return 5 * d.weight*1.5;
     }
-})
-.each("end", function(){ d3.select(this).transition().ease("elastic").duration(1000).attr("r",28);});
+});
   }
 }
 function click(){
