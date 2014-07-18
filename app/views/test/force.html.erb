@@ -120,15 +120,12 @@ node.append("text")
   //$("circle").click(function(){
     //  alert ($(this).data("name"));
       //});
+
   
 $("circle").dblclick(function(){
-    var source = ($(this).data("name"));
-    if ($("#addnode").hasClass("translate")) {
-      $("addnode h2").text(node);
-    }
-    $("#addnode").toggleClass('translate');  
     var node = $(this).data("name");
     $("#addnode h2").text(node);
+    $("#addnode").addClass('translate');  
       });
 
 
@@ -174,6 +171,7 @@ if (d.weight == "1"){
 }
 function click(){
   if( d3.select(this).select("circle").attr("r") > 100 ){
+    $("#addnode").removeClass("translate");
     d3.select(this).select("circle").transition()
       .duration(1000)
       .attr("r", function(d){
@@ -202,6 +200,7 @@ function click(){
       .attr("dy", ".20em");
       
   } else {
+  $("#addnode").removeClass("translate");  
   d3.selectAll("circle").transition()
     .duration(1000)
     .attr("r", function(d){
