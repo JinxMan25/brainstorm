@@ -121,11 +121,11 @@ node.append("text")
     //  alert ($(this).data("name"));
       //});
   
-$("circle").dblclick(function(event){
+$("circle").dblclick(function(){
     var source = ($(this).data("name"));
     $("#addnode").toggleClass('translate');  
-    var node = event.target.data("name");
-    $("#addnode h2").text(node);
+    var node = $(this).data("name");
+    alert(node);
       });
 
 
