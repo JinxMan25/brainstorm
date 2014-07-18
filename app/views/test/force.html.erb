@@ -123,9 +123,12 @@ node.append("text")
   
 $("circle").dblclick(function(){
     var source = ($(this).data("name"));
+    if ($("#addnode").hasClass("translate")) {
+      $("addnode h2").text(node);
+    }
     $("#addnode").toggleClass('translate');  
     var node = $(this).data("name");
-    alert(node);
+    $("#addnode h2").text(node);
       });
 
 
