@@ -46,10 +46,8 @@ var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
-  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
-  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
-  link.type = nodes[link.source] || (nodes[link.source] = {name: link.type});
-  link.type = nodes[link.target] || (nodes[link.target] = {name: link.type});
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, type: link.type});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, type: link.type});
 });
 
 var width = 900,
