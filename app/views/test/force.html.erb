@@ -128,10 +128,13 @@ $("circle").dblclick(function(){
     $("#addnode").addClass('translate');  
       });
 
-$("circle").mouseover(function(){
+$("circle").hover(function(){
   var node = $(this).data("name");
-  $("#addnode h2).text(node);
+  $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
+  },
+  function(){
+  $("#addnode").removeClass('translate');
   });
 
 function tick() {
