@@ -38,8 +38,8 @@ var links = [
   {"source": "Apple", "target": "Motorola", "type": "21"},
   {"source": "Microsoft", "target": "Motorola", "type": "22"},
   {"source": "Motorola", "target": "Microsoft", "type": "23"},
-  {"source": "Huawei", "target": "ZTE", "type": "24"},
-  {"source": "Ericsson", "target": "ZTE", "type": "25"},
+  {"source": "ZTE", "target": "Huawei", "type": "24"},
+  {"source": "ZTE", "target": "Ericsson", "type": "25"},
   {"source": "Kodak", "target": "Samsung", "type": "26"},
   {"source": "Apple", "target": "Samsung", "type": "27"},
   {"source": "Kodak", "target": "RIM", "type": "28"},
@@ -51,7 +51,7 @@ var nodes = {};
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
   link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target});
-  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name});
 });
 
 var width = 900,
