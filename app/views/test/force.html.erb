@@ -6,6 +6,10 @@
 <body>
 <div id="addnode">
   <h2>Microsoft</h2>
+  <h3 id="target">
+  <h3>
+    <h3 id="source">
+    </h3>
 </div>
 <script>
 
@@ -127,14 +131,14 @@ $("circle").dblclick(function(){
       });
 
 $("circle").hover(function(){
-    var node = $(this).data("name");
     if($(this).data("target")){
   var target = $(this).data("target");
-  $("#addnode h2").text(target);
+  $("#target").text("Target: " + target);
   } else {
     $("#addnode h2").text("No targets");
     //var source = $(this).data("source");
   }
+  var node = $(this).data("name");
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
   },
