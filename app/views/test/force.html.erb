@@ -127,10 +127,13 @@ $("circle").dblclick(function(){
       });
 
 $("circle").hover(function(){
+    var node = $(this).data("name");
     if($(this).data("target")){
   var target = $(this).data("target");
+  $("#addnode h2").text(target);
   } else {
-    var node = "No targets";
+    $("#addnode h2").text("No targets");
+    //var source = $(this).data("source");
   }
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
