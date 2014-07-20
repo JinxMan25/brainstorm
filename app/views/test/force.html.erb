@@ -15,7 +15,7 @@ var links = [
   {"source": "Microsoft", "target": "HTC", "type": "2"},
   {"source": "Samsung", "target": "Apple", "type": "3"},
   {"source": "Motorola", "target": "Apple", "type": "4"},
-  {"source": "Nokia", "target": "Apple", "type": "5"},
+  {"source": "Apple", "target": "Nokias", "type": "5"},
   {"source": "HTC", "target": "Apple", "type": "6"},
   {"source": "Kodak", "target": "Apple", "type": "7"},
   {"source": "Microsoft", "target": "Barnes & Noble", "type": "8"},
@@ -46,8 +46,8 @@ var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
-  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, type: link.type});
-  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, type: link.type});
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, targets: link.target});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source});
 });
 
 var width = 900,
@@ -102,7 +102,7 @@ node.append("circle")
     .attr("stroke","black")
     .attr("stroke-width",1.5)
     .attr("data-id", function(d){
-        return d.index;
+        return d.targets;
         })
     .attr("data-name", function(d){
         return d.name;
@@ -127,7 +127,11 @@ $("circle").dblclick(function(){
       });
 
 $("circle").hover(function(){
-  var node = $(this).data("name");
+    if($(this).data("id")){
+  var node = $(this).data("id");
+  } else {
+    var node = "No targets";
+  }
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
   },
