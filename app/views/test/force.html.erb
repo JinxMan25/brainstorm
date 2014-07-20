@@ -106,7 +106,7 @@ node.append("circle")
     .attr("stroke","black")
     .attr("stroke-width",1.5)
     .attr("data-target", function(d){
-        return d.targets;
+        return d.target;
         })
     .attr("data-name", function(d){
         return d.name;
@@ -135,7 +135,7 @@ $("circle").hover(function(){
   var target = $(this).data("target");
   $("#target").text("Target: " + target);
   } else {
-    $("#addnode h2").text("No targets");
+    $("#target").text("No targets");
     //var source = $(this).data("source");
   }
   var node = $(this).data("name");
