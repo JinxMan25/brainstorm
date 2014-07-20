@@ -46,7 +46,7 @@ var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
-  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, targets: link.target});
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target});
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source});
 });
 
@@ -101,7 +101,7 @@ node.append("circle")
     .attr("fill","grey")
     .attr("stroke","black")
     .attr("stroke-width",1.5)
-    .attr("data-id", function(d){
+    .attr("data-target", function(d){
         return d.targets;
         })
     .attr("data-name", function(d){
@@ -127,8 +127,8 @@ $("circle").dblclick(function(){
       });
 
 $("circle").hover(function(){
-    if($(this).data("id")){
-  var node = $(this).data("id");
+    if($(this).data("target")){
+  var target = $(this).data("target");
   } else {
     var node = "No targets";
   }
