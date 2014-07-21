@@ -110,6 +110,9 @@ node.append("circle")
         })
     .attr("data-name", function(d){
         return d.name;
+        })
+    .attr("data-source", function(d){
+        return d.source;
         });
 
 node.append("text")
