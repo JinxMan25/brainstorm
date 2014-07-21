@@ -135,9 +135,15 @@ $("circle").hover(function(){
   var target = $(this).data("target");
   $("#target").text("Target: " + target);
   } else {
-    $("#target").text("No targets");
+    $("#target").text("Target: None");
     //var source = $(this).data("source");
   }
+  if($(this).data("source")){
+    var source = $(this).data("source");
+    $("#source").text("Source: " + source);
+  } else {
+    $("#source").text("Source: self");
+    }
   var node = $(this).data("name");
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
