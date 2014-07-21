@@ -120,6 +120,11 @@ node.append("text")
     .text(function(d) { return d.name; })
     .attr("dy", ".20em")
     .attr("font-size",12);
+node.append("body")
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.body; })
+    .attr("dy", "10em")
+    .attr("font-size", 12);
 
 
   //$("circle").click(function(){
