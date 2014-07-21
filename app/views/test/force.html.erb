@@ -33,7 +33,7 @@ var links = [
   {"source": "Kodak", "target": "LG", "target_body": "16", "source_body": "b"},
   {"source": "Apple", "target": "Nokia", "target_body": "17", "source_body": "b"},
   {"source": "Qualcomm", "target": "Nokia", "target_body": "18", "source_body": "b"},
-  {"source": "MyTime", "target": "Android", "target_body":"19", "source_body": "b"},
+  {"source": "MyTime", "target": "Android", "target_body":"19", "source_body": "c"},
   {"source": "MyTime", "target": "IOS", "target_body":"20", "source_body": "b"},
   {"source": "Apple", "target": "Motorola", "target_body": "21", "source_body": "b"},
   {"source": "Microsoft", "target": "Motorola", "target_body": "22", "source_body": "b"},
@@ -43,15 +43,15 @@ var links = [
   {"source": "Kodak", "target": "Samsung", "target_body": "26", "source_body": "b"},
   {"source": "Apple", "target": "Samsung", "target_body": "27", "source_body": "b"},
   {"source": "Kodak", "target": "RIM", "target_body": "28", "source_body": "b"},
-  {"source": "Nokia", "target": "Qualcomm", "target_body": "29, "source_body": "b""}
+  {"source": "Nokia", "target": "Qualcomm", "target_body": "29", "source_body": "b"}
 ];
 
 var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
-  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.type});
-  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.type});
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.source_body});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body});
 });
 
 var width = 900,
