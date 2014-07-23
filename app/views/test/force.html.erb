@@ -17,7 +17,7 @@
 var links = [
   {"source": "Microsoft", "target": "Amazon", "target_body": "1", "source_body": "a"},
   {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": ""},
-{"source": "HTC", "target": "Whatever", "target_body":"HELLO", "source_body": ""},
+{"source": "HTC", "target": "Whatever", "target_body":"Lorem Ipsum is simply dummy text\\n lkjasldf", "source_body": ""},
   {"source": "Samsung", "target": "Apple", "target_body": "3", "source_body": "c"},
   {"source": "Motorola", "target": "Apple", "target_body": "4", "source_body": "b"},
   {"source": "Apple", "target": "Nokias", "target_body": "5", "source_body": "b"},
@@ -128,6 +128,7 @@ node.append("text")
     .attr("dy", "1em")
     .attr("class","node_body")
     .attr("font-size", 12);
+
 
 
   //$("circle").click(function(){
@@ -284,7 +285,7 @@ function click(){
     .ease("elastic")
     .style("display", "inline")
     .style("font-size", 25)
-    attr("dy", "0px");
+    .attr("dy", "0px");
 
   }
 }
