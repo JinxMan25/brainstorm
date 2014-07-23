@@ -124,8 +124,9 @@ node.append("text")
     .attr("font-size",12);
 node.append("text")
     .attr("text-anchor", "middle")
+    .attr("text-align", "justified")
+    .attr("wrap-margin", "25px')
     .text(function(d) { 
-      var body = d.body.match(/\b[\w']+(?:[^\w\n]+[\w']+){0,2}\b/g)
       return d.body; })
     .attr("dy", "1em")
     .attr("class","node_body")
