@@ -157,12 +157,10 @@ $("circle").hover(function(){
   var node = $(this).data("name");
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
-  $(this).siblings('text.node_body').show();
   debugger;
   },
   function(){
   $("#addnode").removeClass('translate');
-  $(this).siblings('text.node_body').hide();
   debugger;
   });
 
@@ -277,9 +275,9 @@ function click(){
     .ease("elastic")
     .attr("dy", "-100px");
   d3.select(this).select('.node_body').transition()
-    .duration(1000)
+    .duration(250)
     .style("display", "inline")
-    .style("font-size", 20)
+    .style("font-size", 25)
     attr("dy", "0px");
 
   }
