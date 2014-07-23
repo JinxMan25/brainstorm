@@ -115,6 +115,12 @@ node.append("circle")
     .attr("data-source", function(d){
         return d.source;
         });
+var bounds = {
+        x: 300, // bounding box is 300 pixels from the left
+        y: 400, // bounding box is 400 pixels from the top
+        width: 500, // bounding box is 500 pixels across
+        height: 600 
+};
 
 node.append("text")
     .attr("text-anchor", "middle")
@@ -128,11 +134,9 @@ node.append("text")
     .text(function(d) { 
       return d.body; })
     .attr("dy", "1em")
-    .attr("shape-inside", "circle")
-    .attr("width", "50px")
     .attr("class","node_body")
     .attr("font-size", 12);
-
+    .textwrap(bounds);
 
 
   //$("circle").click(function(){
