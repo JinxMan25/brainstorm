@@ -16,7 +16,8 @@
 // http://blog.thomsonreuters.com/index.php/mobile-patent-s-graphic-of-the-day/
 var links = [
   {"source": "Microsoft", "target": "Amazon", "target_body": "1", "source_body": "a"},
-  {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": "b"},
+  {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": ""},
+{"source": "HTC", "target": "Whatever", "target_body":"HELLO", "source_body": ""},
   {"source": "Samsung", "target": "Apple", "target_body": "3", "source_body": "c"},
   {"source": "Motorola", "target": "Apple", "target_body": "4", "source_body": "b"},
   {"source": "Apple", "target": "Nokias", "target_body": "5", "source_body": "b"},
@@ -38,8 +39,8 @@ var links = [
   {"source": "Apple", "target": "Motorola", "target_body": "21", "source_body": "b"},
   {"source": "Microsoft", "target": "Motorola", "target_body": "22", "source_body": "b"},
   {"source": "Motorola", "target": "Microsoft", "target_body": "23", "source_body": "b"},
-  {"source": "ZTE", "target": "Huawei", "target_body": "24", "source_body": "b"},
-  {"source": "ZTE", "target": "Ericsson", "target_body": "25", "source_body": "b"},
+  {"source": "ZTE", "target": "Huawei", "target_body": "24", "source_body": "bB"},
+  {"source": "ZTE", "target": "Ericsson", "target_body": "25", "source_body": ""},
   {"source": "Kodak", "target": "Samsung", "target_body": "26", "source_body": "b"},
   {"source": "Apple", "target": "Samsung", "target_body": "27", "source_body": "b"},
   {"source": "Kodak", "target": "RIM", "target_body": "28", "source_body": "b"},
@@ -124,6 +125,7 @@ node.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.body; })
     .attr("dy", "1em")
+    .attr("class","node_body")
     .attr("font-size", 12);
 
 
@@ -155,9 +157,13 @@ $("circle").hover(function(){
   var node = $(this).data("name");
   $("#addnode h2").text(node);
   $("#addnode").addClass('translate');
+  $(this).siblings('text.node_body').show();
+  debugger;
   },
   function(){
   $("#addnode").removeClass('translate');
+  $(this).siblings('text.node_body').hide();
+  debugger;
   });
 
 function tick() {
