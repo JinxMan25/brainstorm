@@ -228,6 +228,9 @@ function click(){
         })
       .attr("stroke","black")
       .attr("stroke-width",1.5);
+    d3.select(this).select('.node_body').transition()
+      .duration(500)
+      .style("display", "none");
     d3.selectAll("text").transition()
       .ease("elastic")
       .duration(1000)
