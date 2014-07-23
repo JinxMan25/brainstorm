@@ -115,12 +115,6 @@ node.append("circle")
     .attr("data-source", function(d){
         return d.source;
         });
-var bounds = {
-        x: 300, // bounding box is 300 pixels from the left
-        y: 400, // bounding box is 400 pixels from the top
-        width: 50, // bounding box is 500 pixels across
-        height: 600 
-};
 
 node.append("text")
     .attr("text-anchor", "middle")
@@ -136,7 +130,6 @@ node.append("text")
     .attr("class","node_body")
     .attr("font-size", 12);
 
-d3.selectAll('text').textwrap(bounds,50);
   //$("circle").click(function(){
     //  alert ($(this).data("name"));
       //});
@@ -211,6 +204,12 @@ if (d.weight == "1"){
   }
 }
 function click(){
+  var bounds = {
+    x : 50,
+    y :50,
+    width : 100,
+    height : 100,
+  }
   if( d3.select(this).select("circle").attr("r") > 100 ){
     $("#addnode").removeClass("translate");
     d3.select(this).select("circle").transition()
@@ -237,11 +236,13 @@ function click(){
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
       .duration(500)
-      .style("display", "none");
+      .style("display", "none")
+      .textwrap(bounds);
     d3.selectAll(".node_title").transition()
       .ease("elastic")
       .duration(1000)
       .style("font-size", "15px")
+      .textwrap(bounds)
       .attr("dy", ".20em");
       
   } else {
