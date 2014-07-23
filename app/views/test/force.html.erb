@@ -276,6 +276,11 @@ function click(){
     .style("font-size", "72px")
     .ease("elastic")
     .attr("dy", "-100px");
+  d3.select(this).select('.node_body').transition()
+    .duration(1000)
+    .style("display", "inline")
+    .style("font-size", 20)
+    attr("dy", "0px");
 
   }
 }
