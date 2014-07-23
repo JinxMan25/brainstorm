@@ -120,6 +120,7 @@ node.append("text")
     .attr("text-anchor", "middle")
     .text(function(d) { return d.name; })
     .attr("dy", ".20em")
+    .attr("class", "node_title")
     .attr("font-size",12);
 node.append("text")
     .attr("text-anchor", "middle")
@@ -229,9 +230,10 @@ function click(){
       .attr("stroke","black")
       .attr("stroke-width",1.5);
     d3.select(this).select('.node_body').transition()
+      .ease("elastic")
       .duration(500)
       .style("display", "none");
-    d3.selectAll("text").transition()
+    d3.selectAll(".node_title").transition()
       .ease("elastic")
       .duration(1000)
       .style("font-size", "15px")
@@ -278,7 +280,8 @@ function click(){
     .ease("elastic")
     .attr("dy", "-100px");
   d3.select(this).select('.node_body').transition()
-    .duration(250)
+    .duration(750)
+    .ease("elastic")
     .style("display", "inline")
     .style("font-size", 25)
     attr("dy", "0px");
