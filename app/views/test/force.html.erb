@@ -17,7 +17,7 @@
 var links = [
   {"source": "Microsoft", "target": "Amazon", "target_body": "1", "source_body": "a"},
   {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": ""},
-{"source": "HTC", "target": "Whatever", "target_body":"Lorem Ipsum is simply dummy textt lkjt lkjt lkjtlkjt lkj lkjasldf yeah this is very good I mean now i can proceed with everything else. Which is definetly great!", "source_body": ""},
+{"source": "HTC", "target": "Whatever", "target_body":"Lorem Ipsum is simply dummy textt lkjt lkjt lkjtlkjt lkj lkjasldf yeah this is very good I mean now i can proceed with everything else. Which is definetly great! Lets this how many words", "source_body": ""},
   {"source": "Samsung", "target": "Apple", "target_body": "3", "source_body": "c"},
   {"source": "Motorola", "target": "Apple", "target_body": "4", "source_body": "b"},
   {"source": "Apple", "target": "Nokias", "target_body": "5", "source_body": "b"},
@@ -133,10 +133,10 @@ node.append("text")
     .attr("width", "10px")
     .text(function(d) { 
       return d.body; })
-    .attr("dy", "0.1em")
+    .attr("dy", "-0.1em")
     .attr("class","node_body")
     .attr("font-size", 12)
-    .call(wrap, 290);
+    .call(wrap,310);
 
   //$("circle").click(function(){
     //  alert ($(this).data("name"));
@@ -260,8 +260,8 @@ function click(){
       .attr("stroke-width",1.5);
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
-      .duration(500)
-      .style("opacity", "0")
+      .duration(1500)
+      .style("opacity", "0");
     d3.selectAll(".node_title").transition()
       .ease("elastic")
       .duration(1000)
@@ -296,6 +296,10 @@ function click(){
     .style("font-size", "15px")
     .ease("elastic")
     .attr("dy",".20em");
+  d3.selectAll(".node_body").transition()
+    .style("opacity", "0")
+    .duration(1500)
+    .ease("elastic");
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(2500)
@@ -309,9 +313,9 @@ function click(){
     .ease("elastic")
     .attr("dy", "-100px");
   d3.select(this).select('.node_body').transition()
-    .duration(2000)
+    .duration(3000)
     .ease("elastic")
-    .style("font-size", 25)
+    .style("font-size", 18)
     .style("opacity", "1")
     .attr("dy", "0px");
 
