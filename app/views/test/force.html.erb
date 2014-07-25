@@ -311,12 +311,15 @@ function click(){
   d3.select(this).select('.node_body').transition()
     .duration(750)
     .ease("elastic")
-    .style("display", "inline")
     .style("font-size", 25)
     .attr("dy", "0px");
 
   }
 }
+
+$("circle").click(function (){
+    $(this).(.node_body).show();
+    });
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 90){
