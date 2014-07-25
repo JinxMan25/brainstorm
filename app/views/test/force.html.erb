@@ -17,7 +17,7 @@
 var links = [
   {"source": "Microsoft", "target": "Amazon", "target_body": "1", "source_body": "a"},
   {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": ""},
-  {"source": "HTC", "target": "Whatever", "target_body":"Lorem Ipsum is simply dummy textt\n lkjt\n lkjt\n lkjt\n lkjt\n lkj\n lkjasldf", "source_body": ""},
+  {"source": "HTC", "target": "Whatever", "target_body":"Lorem Ipsum is simply dummy textt\n lkjt\n lkjt\n lkjtlkjt\n lkj\n lkjasldf", "source_body": ""},
   {"source": "Samsung", "target": "Apple", "target_body": "3", "source_body": "c"},
   {"source": "Motorola", "target": "Apple", "target_body": "4", "source_body": "b"},
   {"source": "Apple", "target": "Nokias", "target_body": "5", "source_body": "b"},
@@ -82,6 +82,7 @@ var node = svg.selectAll(".node")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
     .call(force.drag)
+    .call(wrap, 200)
     .on("click", click);
     
 
@@ -135,12 +136,35 @@ node.append("text")
       return d.body; })
     .attr("dy", "1em")
     .attr("class","node_body")
-    .attr("font-size", 12);
+    .attr("font-size", 12)
+    .call(wrap, 100);
 
   //$("circle").click(function(){
     //  alert ($(this).data("name"));
       //});
-
+function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")) || 0,
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+      }
+    }
+  });
+}
  
 $("circle").dblclick(function(){
     var node = $(this).data("name");
