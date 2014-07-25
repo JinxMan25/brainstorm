@@ -220,7 +220,7 @@ $("circle").hover(function(){
   });
 
 function tick() {
-  i
+  
   link
       .attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
@@ -297,6 +297,10 @@ function click(){
       
   } else {
   $("#addnode").removeClass("translate");  
+  force
+    .charge(-5000)
+    .linkDistance(300);
+  force.start();
   d3.selectAll("circle").transition()
     .duration(1000)
     .attr("r", function(d){
