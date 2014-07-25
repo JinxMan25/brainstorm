@@ -261,7 +261,7 @@ function click(){
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
       .duration(500)
-      .style("display", "none")
+      .style("opacity", "0")
     d3.selectAll(".node_title").transition()
       .ease("elastic")
       .duration(1000)
@@ -309,17 +309,15 @@ function click(){
     .ease("elastic")
     .attr("dy", "-100px");
   d3.select(this).select('.node_body').transition()
-    .duration(750)
+    .duration(2000)
     .ease("elastic")
     .style("font-size", 25)
+    .style("opacity", "1")
     .attr("dy", "0px");
 
   }
 }
 
-$("circle").click(function (){
-    $("node_body").show();
-    });
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 90){
