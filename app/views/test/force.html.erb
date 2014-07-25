@@ -82,7 +82,6 @@ var node = svg.selectAll(".node")
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
     .call(force.drag)
-    .call(wrap, 100)
     .on("click", click);
     
 
@@ -134,10 +133,10 @@ node.append("text")
     .attr("width", "10px")
     .text(function(d) { 
       return d.body; })
-    .attr("dy", "1em")
+    .attr("dy", "2em")
     .attr("class","node_body")
     .attr("font-size", 12)
-    .call(wrap, 100);
+    .call(wrap, 200);
 
   //$("circle").click(function(){
     //  alert ($(this).data("name"));
