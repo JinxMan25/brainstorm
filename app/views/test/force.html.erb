@@ -292,8 +292,7 @@ function click(){
         })
       .attr("stroke","black")
       .attr("stroke-width",1.5)
-      .attr("cx","350")
-      .attr("cy", "200");
+      .attr("transform", function() { return "translate(" + 350 + "," + 450 + ")"; });
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
       .duration(1500)
