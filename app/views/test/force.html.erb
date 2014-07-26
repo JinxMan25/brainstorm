@@ -16,7 +16,7 @@
 // http://blog.thomsonreuters.com/index.php/mobile-patent-s-graphic-of-the-day/
 var links = [
   {"source": "Microsoft", "target": "Amazon", "target_body": "Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "a"},
-  {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": "", "fixed": "true"},
+  {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": "", "fixed": true},
 {"source": "HTC", "target": "Whatever", "target_body":"Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": ""},
   {"source": "Samsung", "target": "Apple", "target_body": "3Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "c"},
   {"source": "Motorola", "target": "Apple", "target_body": "4Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "b"},
@@ -52,7 +52,7 @@ var nodes = {};
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
   link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.source_body, fixed: link.fixed});
-  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body, fixed: link.fixed});
 });
 
 var width = 900,
