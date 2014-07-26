@@ -227,9 +227,8 @@ function tick() {
       .attr("x2", function(d) { return d.target.x; })
       .attr("y2", function(d) { return d.target.y; });
 
+
   node
-      .attr("cx", function(d) { return d.x; })
-      .attr("cy", function(d) { return d.y; })
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
@@ -291,8 +290,7 @@ function click(){
       }
         })
       .attr("stroke","black")
-      .attr("stroke-width",1.5)
-      .attr("transform", function() { return "translate(" + 350 + "," + 450 + ")"; });
+      .attr("stroke-width",1.5);
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
       .duration(1500)
@@ -339,6 +337,9 @@ function click(){
     .style("opacity", "0")
     .duration(1500)
     .ease("elastic");
+  d3.select(this).select("g")
+    .attr("cx", 500)
+    .attr("cy", 500);
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(2500)
