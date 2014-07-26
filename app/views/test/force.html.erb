@@ -267,6 +267,7 @@ function click(){
     force
       .gravity(0.1)
       .linkDistance(150)
+      .charge(-600)
       .start();
     
     $("#addnode").removeClass("translate");
@@ -305,7 +306,8 @@ function click(){
   $("#addnode").removeClass("translate");  
   force
     .gravity(0.01)
-    .linkDistance(280);
+    .linkDistance(280)
+    .charge(-250);
   force.start();
   d3.selectAll("circle").transition()
     .duration(1000)
@@ -355,8 +357,14 @@ function click(){
     .style("font-size", 18)
     .style("opacity", "1")
     .attr("dy", "0px");
-
+    
   }
+}
+
+if (d3.selectAll("circle").attr("r") > 200){
+  force.stop();
+} else {
+  force.resume();
 }
 
 function mouseout() {
