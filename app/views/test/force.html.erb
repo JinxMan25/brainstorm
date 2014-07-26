@@ -337,9 +337,6 @@ function click(){
     .style("opacity", "0")
     .duration(1500)
     .ease("elastic");
-  d3.select(this).select("g")
-    .attr("cx", 500)
-    .attr("cy", 500);
   d3.select(this).select("circle").transition()
     .ease("elastic")
     .duration(2500)
@@ -361,7 +358,6 @@ function click(){
 
   }
 }
-
 
 function mouseout() {
   if( d3.select(this).select("circle").attr("r") < 90){
