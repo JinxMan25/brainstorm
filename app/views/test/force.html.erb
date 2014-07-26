@@ -228,6 +228,8 @@ function tick() {
       .attr("y2", function(d) { return d.target.y; });
 
   node
+      .attr("cx", function(d) { return d.x; })
+      .attr("cx", function(d) { return d.x; })
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
@@ -289,9 +291,9 @@ function click(){
       }
         })
       .attr("stroke","black")
-      .attr("stroke-width",1.5);
-      .attr("x",50)
-      .attr("y", 50);
+      .attr("stroke-width",1.5)
+      .attr("x",500)
+      .attr("y", 500);
     d3.select(this).select('.node_body').transition()
       .ease("elastic")
       .duration(1500)
@@ -305,7 +307,7 @@ function click(){
   } else {
   $("#addnode").removeClass("translate");  
   force
-    .gravity(0)
+    .gravity(0.01)
     .linkDistance(280);
   force.start();
   d3.selectAll("circle").transition()
