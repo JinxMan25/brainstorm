@@ -263,6 +263,9 @@ if (d.weight == "1"){
 function click(){
   
   if( d3.select(this).select("circle").attr("r") > 100 ){
+    force
+      .gravity(0.1)
+      .linkDistance(150);
     $("#addnode").removeClass("translate");
     d3.select(this).select("circle").transition()
       .duration(1000)
@@ -298,7 +301,7 @@ function click(){
   } else {
   $("#addnode").removeClass("translate");  
   force
-    .gravity(20)
+    .gravity(0)
     .linkDistance(300);
   force.start();
   d3.selectAll("circle").transition()
