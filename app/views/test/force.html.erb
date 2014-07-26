@@ -298,7 +298,7 @@ function click(){
   } else {
   $("#addnode").removeClass("translate");  
   force
-    .charge(-3000)
+    .gravity(20)
     .linkDistance(300);
   force.start();
   d3.selectAll("circle").transition()
