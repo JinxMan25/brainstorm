@@ -1,3 +1,8 @@
 class Mindmap < ActiveRecord::Base
-  # attr_accessible :title, :body
+  before_create: set_unique_token
+
+
+  def set_unique_token
+    self.unique_token = SecureRandom.urlsafe_base64(6)
+  end
 end
