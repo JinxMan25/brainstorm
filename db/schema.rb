@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140727180650) do
+ActiveRecord::Schema.define(:version => 20140727181258) do
 
   create_table "mindmaps", :force => true do |t|
     t.datetime "created_at",   :null => false
@@ -21,8 +21,12 @@ ActiveRecord::Schema.define(:version => 20140727180650) do
   end
 
   create_table "nodes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "source"
+    t.string   "target"
+    t.text     "source_body"
+    t.text     "target_body"
   end
 
 end
