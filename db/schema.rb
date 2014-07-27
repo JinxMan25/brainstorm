@@ -11,12 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140727173421) do
+ActiveRecord::Schema.define(:version => 20140727180650) do
 
   create_table "mindmaps", :force => true do |t|
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "unique_token"
+    t.string   "mindmap_name"
+  end
+
+  create_table "nodes", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
