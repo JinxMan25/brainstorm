@@ -1,6 +1,6 @@
 class NodeController < ApplicationController
   def show
-    @mindmap = Mindmap.where(:unique_token => params[:unique_token]).first
+    @mindmap = Mindmap.find(params[:unique_token]).first.nodes
     respond_to do |format|
       format.json { render :json => @mindmap 
     end
