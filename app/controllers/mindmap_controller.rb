@@ -4,6 +4,7 @@ class MindmapController < ApplicationController
     @node = Node.new
   end
   def create
+
   @mindmap = Mindmap.new(params[:mindmap])
   @node = @mindmap.new(params[:node])
     respond_to do |format| 
@@ -12,7 +13,7 @@ class MindmapController < ApplicationController
         format.json { render => :json }
       else
         format.html { render :action => "new" }
-        format.json { render :json => @post.errors, :status => :unprocessable_entity }
+        format.json { render :json => @node.errors, :status => :unprocessable_entity }
       end
     end
   end
