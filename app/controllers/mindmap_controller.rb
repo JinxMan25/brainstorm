@@ -1,8 +1,13 @@
 class MindmapController < ApplicationController
   def new
     @mindmap = Mindmap.new
-    @node = @mindmap.nodes.new
+    @node = @mindmap.nodes.build
+    respond_to do |format|
+      format.html
+      format.json { render :json => @mindmap }
+    end
   end
+
   def create
     @mindmap = Mindmap.new(params[:mindmap])
     @node = @mindmap.new(params[:node])
