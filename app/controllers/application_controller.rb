@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     @mindmap = Mindmap.new
     respond_to do |format|
       format.html
-      format.json { render :json => @post }
+      format.json { render :json => @mindmap }
     end
   end
 end
