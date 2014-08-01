@@ -1,5 +1,6 @@
 @import 'reset'
 $grey : #E6E6E6
+$green : #BEFC60
 $font-stack : monospace, Helvetica, sans-serif
 
 .brainstorm
@@ -20,7 +21,14 @@ $font-stack : monospace, Helvetica, sans-serif
     height: 50px
     margin: 0 auto
     padding: 0
+    background-color: $green
+    border: 0px
     text-align: center
+    color: white
+    text-stroke: 1px 
+    transition: background-color 0.12s ease-in-out
+    &:hover
+      background-color: #f2f2f2
     font-size: 22px
   h1
     font-size: 66px
