@@ -44,7 +44,11 @@
     text-align: center
     color: white
     text-stroke: 1px 
+    outline: 0
     transition: background-color 0.12s ease-in-out
+    transition: box-shadow 0.05 ease-in-out
+    &:active
+      +vendor-prefix(box-shadow, inset 0 0 50px 1px)
     &:hover
       background-color: #f2f2f2
     font-size: 22px
