@@ -1,10 +1,6 @@
-$grey : #333
-= vendor-prefix($name, $style)
-  -web-kit-#{$name}: #{$style}
-  -ms-#{$name}: #{$style}
-  -moz-#{$name}: #{$style}
-  -o-#{$name}: #{$style}
-  #{$name}: #{$style}
+@import 'reset'
+@import 'definitions'
+
 .node_body
   opacity: 0
 .link
@@ -21,7 +17,7 @@ text
 
 svg
   position: absolute
-  box-shadow: 0 4px 0.5px grey, 0 -4px 0.5px grey
+  box-shadow: 0 4px 0.5px $grey, 0 -4px 0.5px $grey
   margin: 0px auto
   display: block
   margin-top: -300px
