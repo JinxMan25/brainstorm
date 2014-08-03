@@ -9,8 +9,10 @@
 <div id="addnode">
   <h2></h2>
   <h3 id="target">
+    Target: <span class="target"></span>
   </h3>
   <h3 id="source">
+    Source: <span class="source"></span>
     </h3>
 </div>
 <script>
@@ -171,16 +173,16 @@ $("circle").dblclick(function(){
 $("circle").hover(function(){
     if($(this).data("target")){
   var target = $(this).data("target");
-  $("#target").text("Target: " + target);
+  $(".target").text(target);
   } else {
-    $("#target").text("Target: None");
+    $(".target").text("None");
     //var source = $(this).data("source");
   }
   if($(this).data("source")){
     var source = $(this).data("source");
-    $("#source").text("Source: " + source);
+    $(".source").text(source);
   } else {
-    $("#source").text("Source: self");
+    $(".source").text("self");
     }
   var node = $(this).data("name");
   $("#addnode h2").text(node);

@@ -26,12 +26,19 @@ text
 .node circle 
   fill: #ccc
 #target
-  background-color: white
+  padding: 5px
+#source
+  @extend #target
+.target
+  padding: 2px
+  color: white
+  background-color: #1EC93E
   border-radius: 5px
   +vendor-prefix(box-shadow, 0 0 1px)
   
-#source
-  @extend #target
+.source
+  @extend .target
+  background-color: $red
 svg
   position: absolute
   box-shadow: 0 4px 0.5px $grey, 0 -4px 0.5px $grey
