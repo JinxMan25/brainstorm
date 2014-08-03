@@ -5,27 +5,18 @@
 <script src="https://rawgithub.com/vijithassar/d3textwrap/master/d3textwrap.v0.js" type="text/javascript"></script>
 <%= stylesheet_link_tag "test" %>
 <body>
+<div class="title"><h1><%= @mindmap.mindmap_name.html_safe %></h1></div>
 <div id="addnode">
-  <h2>Microsoft</h2>
+  <h2></h2>
   <h3 id="target">
-  <h3>
-    <h3 id="source">
+  </h3>
+  <h3 id="source">
     </h3>
 </div>
 <script>
 
 // http://blog.thomsonreuters.com/index.php/mobile-patent-s-graphic-of-the-day/
-var links = [
-{"source": "Microsoft", "target": "Amazon", "target_body": "Let me see <a>Hi</a> habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "a"},
-  {"source": "Microsoft", "target": "HTC", "target_body": "2", "source_body": ""},
-{"source": "HTC", "target": "Whatever", "target_body":"Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": ""},
-  {"source": "Samsung", "target": "Apple", "target_body": "3Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "c"},
-  {"source": "Motorola", "target": "Apple", "target_body": "4Let me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goes", "source_body": "b"},
-  {"source": "Apple", "target": "Nokias", "tLet me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goesarget_body": "5", "source_body": "b"},
-  {"source": "HTC", "target": "Apple", "target_body": "6", "sLet me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goesource_body": "b"},
-  {"source": "Kodak", "target": "Apple", "tLet me see what habbens when I type short. And what I type za looong one man.! Okay, now this time It will be very long my friend. You know? Bery long! Oh that was Bengali! Let me keep typing and see how long this can go. The longer the better. I want it to go until it goesarget_body": "7", "source_body": "b"},
-  {"source": "Nokia", "target": "Qualcomm", "target_body": "29", "source_body": "b"}
-];
+var links = <%= @nodes.to_json.html_safe %>
 
 var nodes = {};
 
