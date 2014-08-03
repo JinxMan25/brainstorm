@@ -25,7 +25,13 @@ text
 
 .node circle 
   fill: #ccc
-
+#target
+  background-color: white
+  border-radius: 5px
+  +vendor-prefix(box-shadow, 0 0 1px)
+  
+#source
+  @extend #target
 svg
   position: absolute
   box-shadow: 0 4px 0.5px $grey, 0 -4px 0.5px $grey
