@@ -1,9 +1,9 @@
 Brainstorm::Application.routes.draw do
-  get "test/force"
   root :to => 'mindmap#new'
   get "mindmap/:unique_token", :to => "node#show", :as => "mindmap"
   post "node/", :to => "node#create"
   post "mindmap/", :to => "mindmap#create"
+  get "test/", :to => "test#force"
   
 
   # The priority is based upon order of creation:
