@@ -1,4 +1,6 @@
+$orange : #FF622E
 $grey : #E6E6E6
+$red: #FF196A
 $green : #BEFC60
 $font-stack : monospace, Helvetica, sans-serif
 = vendor-prefix($name, $style)
@@ -7,3 +9,12 @@ $font-stack : monospace, Helvetica, sans-serif
   -moz-#{$name}: #{$style}
   -o-#{$name}: #{$style}
   #{$name}: #{$style}
+//<-----BLOCK-LEVEL-MIXINS----->//
+= center_block
+  position: relative
+  display: block
+  padding: 0
+  text-align: center
+  margin: 0px auto
+
+
