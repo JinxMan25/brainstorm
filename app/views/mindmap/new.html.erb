@@ -2,6 +2,10 @@
 <div class="brainstorm">
   <h1>Brainstorm</h1>
   <p>Click start to create a mindmap!</p>
-  <input></input>
-  <%= button_tag "Start", class: "start" %>
+  <%= form_for(@mindmap, url: { action: "create" }, html: { class: "mindmap" }) do |mindmap| %>  
+    <%= mindmap.textfield :mindmap_name %>
+    <%= fields_for(@node) do |node| %>
+      <%= node. 
+    <% end %>
+  <% end %>
 </div>
