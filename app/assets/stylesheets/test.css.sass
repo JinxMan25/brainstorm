@@ -2,16 +2,13 @@
 @import 'definitions'
 
 .title
-  position: relative
-  display: block
-  margin: 0 auto
+  +center_block
   left: 50%
   width: 600px
   margin-left: -300px
   font-size: 44px
   font-family: $font-stack
   margin-top: 125px
-  text-align: center
 .node_body
   opacity: 0
 .link
@@ -22,11 +19,13 @@
 text
   font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif
 
-
 .node circle 
   fill: #ccc
+
 #target
-  padding: 5px
+  font-family: $font-stack
+  padding: 8px
+  font-size: 18px
 #source
   @extend #target
 .target
@@ -41,7 +40,7 @@ text
   background-color: $red
 svg
   position: absolute
-  box-shadow: 0 4px 0.5px $grey, 0 -4px 0.5px $grey
+  box-shadow: 0 4px 0.5px grey, 0 -4px 0.5px grey
   margin: 0px auto
   display: block
   margin-top: -300px
@@ -61,7 +60,6 @@ text
 #addnode
   position: absolute
   margin: 0px auto
-  float: right
   margin-top: -300px
   right: 50px
   top: 50%
@@ -78,5 +76,3 @@ text
     text-align: center
     font-weight: 100
     font: monospace, Helvetica, Arial, sans-serif
-
-
