@@ -6,7 +6,7 @@
 <%= stylesheet_link_tag "test" %>
 <body>
 <div class="title"><h1><%= @mindmap.mindmap_name %></h1></div>
-<div id="addnode">
+<div class="addnode">
   <h2></h2>
   <h3 id="target">
     _target(s): <span class="target"></span>
@@ -166,8 +166,8 @@ function wrap(text, width) {
  
 $("circle").dblclick(function(){
     var node = $(this).data("name");
-    $("#addnode h2").text(node);
-    $("#addnode").addClass('translate');  
+    $(".addnode h2").text(node);
+    $(".addnode").addClass('translate');  
       });
 
 $("circle").hover(function(){
@@ -185,11 +185,11 @@ $("circle").hover(function(){
     $(".source").text("self");
     }
   var node = $(this).data("name");
-  $("#addnode h2").text(node);
-  $("#addnode").addClass('translate');
+  $(".addnode h2").text(node);
+  $(".addnode").addClass('translate');
   },
   function(){
-  $("#addnode").removeClass('translate');
+  $(".addnode").removeClass('translate');
   });
 
 function tick() {
@@ -243,7 +243,7 @@ function click(){
       .charge(-600)
       .start();
     
-    $("#addnode").removeClass("translate");
+    $(".addnode").removeClass("translate");
     d3.select(this).select("circle").transition()
       .duration(1000)
       .attr("r", function(d){
@@ -276,7 +276,7 @@ function click(){
       .attr("dy", ".20em");
       
   } else {
-  $("#addnode").removeClass("translate");  
+  $(".addnode").removeClass("translate");  
   force
     .gravity(0.01)
     .linkDistance(280)
