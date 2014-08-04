@@ -6,4 +6,8 @@ class Node < ActiveRecord::Base
  belongs_to :mindmap
 
  attr_accessible :target, :source, :target_body, :source_body
+
+ def to_param
+   unique_token
+ end
 end

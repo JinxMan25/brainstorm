@@ -1,6 +1,6 @@
 Brainstorm::Application.routes.draw do
   root :to => 'mindmap#new'
-  get "mindmap/:unique_token", :to => "node#show", :as => "mindmap"
+  get 'mindmap/:unique_token', :to => "node#show", :as => "mindmap"
   post "node/", :to => "node#create"
   post "mindmap/", :to => "mindmap#create"
   get "test/", :to => "test#force"

@@ -10,9 +10,8 @@ class MindmapController < ApplicationController
 
   def create
     @mindmap = Mindmap.new(params[:mindmap])
-    @node = @mindmap.new(params[:node])
       respond_to do |format| 
-        if @mindmap.save && @node.save
+        if @mindmap.save
           format.html { redirect_to(mindmap_path(:unique_token => @mindmap.unique_token), :notice => "Mindmap created! Start by clicking on the node to add more nodes!")}
           format.json { render :json => @mindmap, :status => :created, :location => @mindmap }
         else

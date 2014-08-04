@@ -3,11 +3,17 @@
   <h1>Brainstorm</h1>
   <p>Click start to create a mindmap!</p>
   <%= form_for(@mindmap, url: { action: "create" }, html: { class: "mindmap" }) do |mindmap| %>  
-    <%= mindmap.text_field :mindmap_name, :placeholder => "name" %>
-    <%= fields_for(@node) do |node| %>
-      <%= node.text_field :source, :placeholder => "add a source" %> 
-      <%= node.text_field :target, :placeholder => "add a target" %>
+    <% if @mindmap.errors.any? %>
+      <h2><%= pluralize(@mindmap.errors.count, "error")%> prohibited this post
+        from being saved MAN!
+      </h2>
+      <ul>
+        <% @mindmap.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
     <% end %>
+    <%= mindmap.text_field :mindmap_name, :placeholder => "name" %>
     <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
 </div>
