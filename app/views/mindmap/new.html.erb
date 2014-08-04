@@ -17,6 +17,8 @@
     <%= fields_for(@node) do |node| %>
       <%= node.text_field :source, :placeholder => "add a source" %> 
       <%= node.text_field :target, :placeholder => "add a target" %>
+      <%= node.text_field :source_body, :placeholder => "add a source body" %>
+      <%= node.text_field :target_body, :placeholder => "add a target body" %>
     <% end %>
     <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
