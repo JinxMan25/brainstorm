@@ -3,9 +3,11 @@
   <h1>Brainstorm</h1>
   <p>Click start to create a mindmap!</p>
   <%= form_for(@mindmap, url: { action: "create" }, html: { class: "mindmap" }) do |mindmap| %>  
-    <%= mindmap.textfield :mindmap_name %>
+    <%= mindmap.text_field :mindmap_name, :placeholder => "name" %>
     <%= fields_for(@node) do |node| %>
-      <%= node. 
+      <%= node.text_field :source, :placeholder => "add a source" %> 
+      <%= node.text_field :target, :placeholder => "add a target" %>
     <% end %>
+    <%= mindmap.submit "Start" %>
   <% end %>
 </div>
