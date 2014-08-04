@@ -31,12 +31,23 @@
     &:focus
       +vendor-prefix(box-shadow,inset 0 0 5px 1px) 
   
+  #initialize
+    +center_block
+    height 50px
+    width: 100px
+    border: 0
+    background-color: $blue
+    padding: 10px
+    color: white
+    outline: 0
+    &:hover
+      cursor: pointer
+    
   .submit
     +center_block
     width: 100px
     height: 50px
     background-color: $orange
-    border: 0px
     color: white
     outline: 0
     transition: background-color 0.12s ease-in-out
