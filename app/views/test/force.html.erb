@@ -13,13 +13,10 @@
   </h3>
   <h3 id="source">
     &#10095 Source<span class"rocket">&#10159</span><span class="source"></span>
-    </h3>
+  </h3>
 </div>
 <script>
-
-  // http://blog.thomsonreuters.com/index.php/mobile-patent-s-graphic-of-the-day/
   var links = <%= @nodes.to_json.html_safe %>
-
   var nodes = {};
 
   // Compute the distinct nodes from the links.
@@ -32,50 +29,49 @@
       height = 600;
 
   var force = d3.layout.force()
-      .nodes(d3.values(nodes))
-      .links(links)
-      .size([width, height])
-      .linkDistance(150)
-      .charge(-600)
-      .on("tick", tick)
-      .start();
+    .nodes(d3.values(nodes))
+    .links(links)
+    .size([width, height])
+    .linkDistance(150)
+    .charge(-600)
+    .on("tick", tick)
+    .start();
 
   var svg = d3.select("body").append("svg")
       .attr("height", height)
       .attr("width", width);
   var link = svg.selectAll(".link")
       .data(force.links())
-    .enter().append("line")
+      .enter().append("line")
       .attr("class", "link");
 
   var node = svg.selectAll(".node")
-      .data(force.nodes())
+    .data(force.nodes())
     .enter().append("g")
-      .attr("class", "node")
-      .on("mouseover", mouseover)
-      .on("mouseout", mouseout)
-      .call(force.drag)
-      .on("click", click);
-      
+    .attr("class", "node")
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
+    .call(force.drag)
+    .on("click", click);
 
   node.append("circle")
-  .attr("r", function(d){
+    .attr("r", function(d){
       if (d.weight == "1"){
-      return 28;
-      }else if (d.weight == "2"){
-      return 17.5 * d.weight;
-      }else if (d.weight == "3"){
+        return 28;
+      } else if (d.weight == "2") {
+        return 17.5 * d.weight;
+      } else if (d.weight == "3") {
         return 13 * d.weight;
-      }else if (d.weight == "4"){
+      } else if (d.weight == "4") {
         return 11 * d.weight;
-      }else if (d.weight == "5"){
+      } else if (d.weight == "5") {
         return 10* d.weight;
-      }else if (d.weight == "6"){
+      } else if (d.weight == "6") {
         return 7 * d.weight;
-      }else if (d.weight >= "7"){
+      } else if (d.weight >= "7") {
         return 6.5 * d.weight;
       }
-        })
+    })
       .attr("fill","grey")
       .attr("stroke","black")
       .attr("stroke-width",1.5)
@@ -93,64 +89,36 @@
       y :50,
       width : 100,
       height : 100,
-    };
+  };
   node.append("text")
-      .attr("text-anchor", "middle")
-      .text(function(d) { return d.name; })
-      .attr("dy", ".20em")
-      .attr("class", "node_title")
-      .attr("font-size",12);
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.name; })
+    .attr("dy", ".20em")
+    .attr("class", "node_title")
+    .attr("font-size",12);
   node.append("text")
-      .attr("text-anchor", "middle")
-      .attr("height", "10px")
-      .attr("width", "10px")
-      .text(function(d) { 
-        return d.body; })
-      .attr("dy", "-0.1em")
-      .attr("class","node_body")
-      .attr("font-size", 12)
-      .call(wrap,400);
+    .attr("text-anchor", "middle")
+    .attr("height", "10px")
+    .attr("width", "10px")
+    .text(function(d) { 
+      return d.body; 
+    })
+    .attr("dy", "-0.1em")
+    .attr("class","node_body")
+    .attr("font-size", 12)
+    .call(wrap,400);
 
-    //$("circle").click(function(){
-      //  alert ($(this).data("name"));
-        //});
-  function collide(alpha) {
-    var quadtree = d3.geom.quadtree(nodes);
-    return function(d) {
-      var r = d.weight*5 + maxRadius + Math.max(1.5, 6),
-          nx1 = d.x - r,
-          nx2 = d.x + r,
-          ny1 = d.y - r,
-          ny2 = d.y + r;
-      quadtree.visit(function(quad, x1, y1, x2, y2) {
-        if (quad.point && (quad.point !== d)) {
-          var x = d.x - quad.point.x,
-              y = d.y - quad.point.y,
-              l = Math.sqrt(x * x + y * y),
-              r = d.weight*6 + quad.point.radius + (d.cluster === quad.point.cluster ? 1.5 : 6);
-          if (l < r) {
-            l = (l - r) / l * alpha;
-            d.x -= x *= l;
-            d.y -= y *= l;
-            quad.point.x += x;
-            quad.point.y += y;
-          }
-        }
-        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-      });
-    };
-  }
-  function wrap(text, width) {
+  function wrap (text, width) {
     text.each(function() {
       var text = d3.select(this),
-          words = text.text().split(/\s+/).reverse(),
-          word,
-          line = [],
-          lineNumber = 0,
-          lineHeight = 0.9, // ems
-          y = text.attr("y"),
-          dy = parseFloat(text.attr("dy")) || 0,
-          tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+      words = text.text().split(/\s+/).reverse(),
+      word,
+      line = [],
+      lineNumber = 0,
+      lineHeight = 0.9, // ems
+      y = text.attr("y"),
+      dy = parseFloat(text.attr("dy")) || 0,
+      tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
       while (word = words.pop()) {
         line.push(word);
         tspan.text(line.join(" "));
@@ -165,78 +133,77 @@
   }
    
   $("circle").dblclick(function(){
-      var node = $(this).data("name");
-      $(".addnode h2").text(node);
-      $(".addnode").addClass('translate');  
-        });
+    var node = $(this).data("name");
+    $(".addnode h2").text(node);
+    $(".addnode").addClass('translate');  
+  });
 
   $("circle").hover(function(){
-      if($(this).data("target")){
-    var target = $(this).data("target");
-    $(".target").text(target);
+    if($(this).data("target")){
+      var target = $(this).data("target");
+      $(".target").text(target);
     } else {
       $(".target").text("None");
-      //var source = $(this).data("source");
     }
-    if($(this).data("source")){
+    if ($(this).data("source")) {
       var source = $(this).data("source");
       $(".source").text(source);
     } else {
       $(".source").text("self");
-      }
+    }
     var node = $(this).data("name");
     $(".addnode h2").text(node);
     $(".addnode").addClass('translate');
-    },
+  },
     function(){
-    $(".addnode").removeClass('translate');
-    });
+      $(".addnode").removeClass('translate');
+  });
 
   function tick() {
     
     link
-        .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
     node
-        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+      .attr("transform", function(d) { 
+          return "translate(" + d.x + "," + d.y + ")"; 
+      });
   }
 
   function mouseover() {
-    
-    if( d3.select(this).select("circle").attr("r") < 100){
-    d3.select(this).select("text").transition()
-      .style("font-size","25px")
-      .ease("elastic")
-      .duration(1000);
-    d3.select(this).select("circle").transition()
+
+    if (d3.select(this).select("circle").attr("r") < 100) {
+      d3.select(this).select("text").transition()
+        .style("font-size","25px")
         .ease("elastic")
-        .duration(1000)
-        .attr("r",function(d){
-  if (d.weight == "1"){
-      return 28*2;
-      }else if (d.weight == "2"){
-      return 17.5 * d.weight * 1.5;
-      }else if (d.weight == "3"){
-        return 13 * d.weight*1.5;
-      }else if (d.weight == "4"){
-        return 11 * d.weight*1.5;
-      }else if (d.weight == "5"){
-        return 10* d.weight*1.5;
-      }else if (d.weight == "6"){
-        return 7 * d.weight*1.5;
-      }else if (d.weight >= "7"){
-        return 5 * d.weight*1.5;
-      }
-  });
+        .duration(1000);
+      d3.select(this).select("circle").transition()
+          .ease("elastic")
+          .duration(1000)
+          .attr("r",function(d){
+            if (d.weight == "1") {
+              return 28*2;
+            } else if (d.weight == "2") {
+              return 17.5 * d.weight * 1.5;
+            } else if (d.weight == "3") {
+              return 13 * d.weight*1.5;
+            } else if (d.weight == "4") {
+              return 11 * d.weight*1.5;
+            } else if (d.weight == "5") {
+              return 10* d.weight*1.5;
+            } else if (d.weight == "6") {
+              return 7 * d.weight*1.5;
+            } else if (d.weight >= "7") {
+              return 5 * d.weight*1.5;
+            }
+          });
     }
   }
   function click(){
     
-    if( d3.select(this).select("circle").attr("r") > 100 ){
+    if (d3.select(this).select("circle").attr("r") > 100) {
       force
         .gravity(0.1)
         .linkDistance(150)
@@ -247,22 +214,22 @@
       d3.select(this).select("circle").transition()
         .duration(1000)
         .attr("r", function(d){
-        if (d.weight == "1"){
-        return 28;
-        }else if (d.weight == "2"){
-        return 17.5 * d.weight;
-        }else if (d.weight == "3"){
-          return 13 * d.weight;
-        }else if (d.weight == "4"){
-          return 11 * d.weight;
-        }else if (d.weight == "5"){
-          return 10* d.weight;
-        }else if (d.weight == "6"){
-          return 7 * d.weight;
-        }else if (d.weight >= "7"){
-          return 6.5 * d.weight;
-        }
-          })
+          if (d.weight == "1"){
+            return 28;
+          }else if (d.weight == "2") {
+            return 17.5 * d.weight;
+          }else if (d.weight == "3") {
+            return 13 * d.weight;
+          }else if (d.weight == "4") {
+            return 11 * d.weight;
+          }else if (d.weight == "5") {
+            return 10* d.weight;
+          }else if (d.weight == "6"){
+            return 7 * d.weight;
+          }else if (d.weight >= "7"){
+            return 6.5 * d.weight;
+          }
+        })
         .attr("stroke","black")
         .attr("stroke-width",1.5);
       d3.select(this).select('.node_body').transition()
@@ -276,62 +243,62 @@
         .attr("dy", ".20em");
         
     } else {
-    $(".addnode").removeClass("translate");  
-    force
-      .gravity(0.01)
-      .linkDistance(280)
-      .charge(-250);
-    force.start();
-    d3.selectAll("circle").transition()
-      .duration(1000)
-      .attr("r", function(d){
-      if (d.weight == "1"){
-      return 28;
-      }else if (d.weight == "2"){
-      return 17.5 * d.weight;
-      }else if (d.weight == "3"){
-        return 13 * d.weight;
-      }else if (d.weight == "4"){
-        return 11 * d.weight;
-      }else if (d.weight == "5"){
-        return 10* d.weight;
-      }else if (d.weight == "6"){
-        return 7 * d.weight;
-      }else if (d.weight >= "7"){
-        return 6.5 * d.weight;
-      }
+      $(".addnode").removeClass("translate");  
+      force
+        .gravity(0.01)
+        .linkDistance(280)
+        .charge(-250);
+      force.start();
+      d3.selectAll("circle").transition()
+        .duration(1000)
+        .attr("r", function(d){
+          if (d.weight == "1") {
+            return 28;
+          } else if (d.weight == "2") {
+              return 17.5 * d.weight;
+          } else if (d.weight == "3") {
+              return 13 * d.weight;
+          } else if (d.weight == "4") {
+              return 11 * d.weight;
+          } else if (d.weight == "5"){
+              return 10* d.weight;
+          } else if (d.weight == "6"){
+              return 7 * d.weight;
+          } else if (d.weight >= "7"){
+              return 6.5 * d.weight;
+          }
         })
-      .attr("stroke-width", 1.5)
-      .attr("stroke", "black");
-    d3.selectAll("text").transition()
-      .duration(750)
-      .style("font-size", "15px")
-      .ease("elastic")
-      .attr("dy",".20em");
-    d3.selectAll(".node_body").transition()
-      .style("opacity", "0")
-      .duration(1500)
-      .ease("elastic");
-    d3.select(this).select("circle").transition()
-      .ease("elastic")
-      .duration(2500)
-      .attr("r", 250)
-      .style("z-index","200")
-      .attr("stroke-width", 10)
-      .attr("stroke", "purple");
-    d3.select(this).select("text").transition()
-      .duration(2500)
-      .style("font-size", "72px")
-      .ease("elastic")
-      .attr("dy", "-100px");
-    d3.select(this).select('.node_body').transition()
-      .duration(3000)
-      .ease("elastic")
-      .style("font-size", 18)
-      .style("opacity", "1")
-      .attr("dy", "0px");
-      
-    }
+        .attr("stroke-width", 1.5)
+        .attr("stroke", "black");
+      d3.selectAll("text").transition()
+        .duration(750)
+        .style("font-size", "15px")
+        .ease("elastic")
+        .attr("dy",".20em");
+      d3.selectAll(".node_body").transition()
+        .style("opacity", "0")
+        .duration(1500)
+        .ease("elastic");
+      d3.select(this).select("circle").transition()
+        .ease("elastic")
+        .duration(2500)
+        .attr("r", 250)
+        .style("z-index","200")
+        .attr("stroke-width", 10)
+        .attr("stroke", "purple");
+      d3.select(this).select("text").transition()
+        .duration(2500)
+        .style("font-size", "72px")
+        .ease("elastic")
+        .attr("dy", "-100px");
+      d3.select(this).select('.node_body').transition()
+        .duration(3000)
+        .ease("elastic")
+        .style("font-size", 18)
+        .style("opacity", "1")
+        .attr("dy", "0px");
+        
+      }
   }
 
   if (d3.selectAll("circle").attr("r") > 200){
@@ -341,32 +308,32 @@
   }
 
   function mouseout() {
-    if( d3.select(this).select("circle").attr("r") < 90){
+    if( d3.select(this).select("circle").attr("r") < 90) {
       d3.select(this).select("text").transition()
         .style("font-size", "15px")
         .ease("elastic")
         .duration(750);
       d3.select(this).select("circle").transition()
-          .ease("elastic")
-          .duration(750)
-          .attr("r",function(d){
-            if (d.weight == "1"){
-              return 28;
-            }else if (d.weight == "2"){
-              return 17.5 * d.weight;
-            }else if (d.weight == "3"){
-              return 13 * d.weight;
-            }else if (d.weight == "4"){
-                return 11 * d.weight;
-            }else if (d.weight == "5"){
-                return 10* d.weight;
-            }else if (d.weight == "6"){
-                return 7 * d.weight;
-            }else if (d.weight >= "7"){
-                return 6.5 * d.weight;
-            }
-          });
-      }
+        .ease("elastic")
+        .duration(750)
+        .attr("r",function(d){
+          if (d.weight == "1") {
+            return 28;
+          } else if (d.weight == "2") {
+            return 17.5 * d.weight;
+          } else if (d.weight == "3") {
+            return 13 * d.weight;
+          } else if (d.weight == "4") {
+            return 11 * d.weight;
+          } else if (d.weight == "5") {
+            return 10* d.weight;
+          } else if (d.weight == "6") {
+            return 7 * d.weight;
+          } else if (d.weight >= "7") {
+            return 6.5 * d.weight;
+          }
+         });
+    }
   }
 
 </script>
