@@ -42,10 +42,10 @@
     background-color: $orange
     color: white
     outline: 0
+    border: 0px
     border-bottom: 1px solid black
-    transition: background-color 0.12s ease-in-out
+    transition: background-color 0.12s ease-in-out, -webkit-box-shadow 0.055s ease-in-out
     &:active
-      transition: box-shadow 0.005s ease-in-out
       +vendor-prefix(box-shadow, inset 0 0 10px)
     &:hover
       cursor: pointer
@@ -73,10 +73,10 @@
   input:not(#mindmap_mindmap_name):not(.submit)
     display: none
 
-  .shrink
-    width: 70%
-    font-size: 12px
-    height: 30px
+.shrink
+  width: 70%
+  font-size: 12px
+  height: 30px
     
 .clicked
   margin-top: -247px

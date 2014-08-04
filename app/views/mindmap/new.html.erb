@@ -20,9 +20,7 @@
       <%= node.text_field :source_body, :placeholder => "add a source body" %>
       <%= node.text_field :target_body, :placeholder => "add a target body" %>
     <% end %>
-    <div class="buttons">
-      <%= mindmap.submit "Start", :class => "submit" %>
-    </div>
+    <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
       <%= button_tag "Initialize with nodes", :id => "initialize" %>
   <script>
