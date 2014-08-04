@@ -13,6 +13,8 @@
   top: 50%
   padding: 3px
   margin-top: -175px
+  max-height: 1000px
+  +vendor-prefix(transition, margin-top 0.5s ease-in-out)
   +vendor-prefix(box-shadow,0 0 15px 1px rgba(0,0,0,0.3))
   p
     font-family: $font-stack
@@ -68,4 +70,6 @@
   input:not(#mindmap_mindmap_name):not(.submit)
     display: none
 
+.clicked
+  margin-top: -247px
 
