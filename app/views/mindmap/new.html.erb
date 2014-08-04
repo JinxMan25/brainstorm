@@ -14,6 +14,10 @@
       </ul>
     <% end %>
     <%= mindmap.text_field :mindmap_name, :placeholder => "name" %>
+    <%= fields_for(@node) do |node| %>
+      <%= node.text_field :source, :placeholder => "add a source" %> 
+      <%= node.text_field :target, :placeholder => "add a target" %>
+    <% end %>
     <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
 </div>
