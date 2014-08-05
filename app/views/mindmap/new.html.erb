@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "mindmap" %>
 <div class="brainstorm">
-  <h1>Brainstorm</h1>
+  <h1 class="project">Brainstorm</h1>
   <p>Click start to create a mindmap!</p>
   <%= form_for(@mindmap, url: { action: "create" }, html: { class: "mindmap" }) do |mindmap| %>  
     <% if @mindmap.errors.any? %>
