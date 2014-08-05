@@ -15,10 +15,12 @@
     <% end %>
     <%= mindmap.text_field :mindmap_name, :placeholder => "name" %>
     <%= fields_for(@node) do |node| %>
+    <div class="hidden">
       <%= node.text_field :source, :placeholder => "add a source" %> 
       <%= node.text_field :target, :placeholder => "add a target" %>
       <%= node.text_area :source_body, :placeholder => "add a source body" %>
       <%= node.text_area :target_body, :placeholder => "add a target body" %>
+    </div>
     <% end %>
     <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
@@ -26,7 +28,7 @@
   <script>
     $(document).ready(function(){
       $("#initialize").click(function(){
-      $(".mindmap #node_source, #node_target, #node_source_body, #node_target_body").fadeIn().css('display','block');
+      $(".hidden input,textarea").fadeIn().css('display','block');
       $(".mindmap input, textarea").not('.submit').addClass('shrink');
 
       $(".brainstorm").addClass('clicked');
