@@ -17,8 +17,8 @@
     <%= fields_for(@node) do |node| %>
       <%= node.text_field :source, :placeholder => "add a source" %> 
       <%= node.text_field :target, :placeholder => "add a target" %>
-      <%= node.text_field :source_body, :placeholder => "add a source body" %>
-      <%= node.text_field :target_body, :placeholder => "add a target body" %>
+      <%= node.text_area :source_body, :placeholder => "add a source body" %>
+      <%= node.text_area :target_body, :placeholder => "add a target body" %>
     <% end %>
     <%= mindmap.submit "Start", :class => "submit" %>
   <% end %>
@@ -27,7 +27,7 @@
     $(document).ready(function(){
       $("#initialize").click(function(){
       $(".mindmap #node_source, #node_target, #node_source_body, #node_target_body").fadeIn().css('display','block');
-      $(".mindmap input").not('.submit').addClass('shrink');
+      $(".mindmap input, textarea").not('.submit').addClass('shrink');
 
       $(".brainstorm").addClass('clicked');
       $("#initialize").hide();
