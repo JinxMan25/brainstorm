@@ -1,6 +1,26 @@
 @import 'reset'
 @import 'definitions'
+$transition: -webkit-box-shadow 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out,text-align 1s ease-in-out
+.github
+  img
+    vertical-align: middle
+    transition: all 0.2s ease-in-out
+    &:hover
+      +vendor-prefix(transform, translateY(-5px))
+  position: absolute
+  padding: 10px
+  display: block
 
+.createdby
+  @extend .github
+  margin-top: 5px
+  right: 0px
+
+.facebook
+  position: absolute 
+  display: block
+  margin-top: 20px
+  right: 0px
 .brainstorm
   .project
     font-size: 66px
@@ -65,15 +85,12 @@
     height: 50px
     margin-bottom: 10px
     outline: 0
-    transition: -webkit-box-shadow 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out, font-size 0.35s ease-in-out, text-align 1s ease-in-out
+    transition: $transition
     &:focus
       +vendor-prefix(box-shadow, inset 0 0 5px 1px)
     &:focus:not(.submit):not(input)
       +vendor-prefix(box-shadow,inset 0 0 5px 1px) 
       height: 100px
-  textarea
-    @extend input
-    text-align: left
   input:not(#mindmap_mindmap_name):not(.submit)
     display: none
   .shrink
@@ -81,10 +98,18 @@
     text-align: left
     font-size: 12px
     height: 30px
-  .hidden
-    input, textarea
-      transition: -webkit-box-shadow 0.2s ease-in-out, height 0.25s ease-in-out, width 0s ease-in-out, font-size 0s ease-in-out, text-align 0s ease-in-out
-    
+
+.hidden
+  input, textarea
+    +center_block
+    @extend .shrink
+    margin-bottom: 10px
+    display: none
+    border: 0px
+    transition: $transition
+    &:focus:not(input)
+      +vendor-prefix(box-shadow,inset 0 0 5px 1px) 
+      height: 100px
 .clicked
   margin-top: -247px
 

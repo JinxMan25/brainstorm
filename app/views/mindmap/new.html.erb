@@ -28,7 +28,8 @@
   <script>
     $(document).ready(function(){
       $("#initialize").click(function(){
-      $(".hidden input,textarea").fadeIn().css('display','block');
+      $(".hidden").fadeIn().css('display','block');
+      $(".hidden input, textarea").fadeIn().css('display', 'block');
       $(".mindmap input, textarea").not('.submit').addClass('shrink');
 
       $(".brainstorm").addClass('clicked');
@@ -36,4 +37,10 @@
       });
     });
   </script>
+  <div class="github">
+    <%= image_tag("github2.png", size: "35x35", alt: "Github") %>
+    <%= image_tag("facebook.png", size: "35x35", alt: "Github") %>
+    <%= image_tag("twitter.png", size: "35x35", alt: "Github") %>
+  </div>
+  <span class="createdby">created By <%= link_to "Samiul Huq", "http://samiulhuq.com" %></span>
 </div>
