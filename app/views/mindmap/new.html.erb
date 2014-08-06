@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "mindmap" %>
+<%= javascript_include_tag "mindmap" %>
 <div class="brainstorm">
   <h1 class="project">Brainstorm</h1>
   <p>Click start to create a mindmap!</p>
@@ -26,18 +27,6 @@
     <hr>
   <% end %>
       <%= button_tag "Initialize with nodes", :id => "initialize" %>
-  <script>
-    $(document).ready(function(){
-      $("#initialize").click(function(){
-      $(".hidden input, textarea").fadeIn().css('display', 'block');
-      $(".mindmap input, textarea").not('.submit').addClass('shrink');
-
-      $(".brainstorm").addClass('clicked');
-      $("#initialize").hide();
-      $('hr').hide();
-      });
-    });
-  </script>
   <div class="github">
     <%= link_to(image_tag("github2.png", size: "35x35", alt: "Github"), "http://github.com/clanofnoobs") %>
     <%= link_to(image_tag("facebook.png", size: "35x35", alt: "facebook"), "http://facebook.com/samiul.huq") %>
