@@ -17,16 +17,12 @@
 
     var svg = d3.select("body").append("svg")
         .attr("width", width)
-        .attr("height", height)
-        .style("border", "1px solid black");
+        .attr("height", height);
 
         var dataset = <%= @nodes.to_json.html_safe %>
 
     var link = svg.append("g").selectAll(".link"),
-    circle = svg.append("g").selectAll("circle"),
-    text = svg.append("g").selectAll("text"),
-    body = svg.append("g").selectAll("text"),
-    marker = svg.append("defs").selectAll("marker");
+    node = svg.selectAll(".node");
 
     var nodes = {};
 
@@ -83,6 +79,7 @@
         force
             .nodes(d3.values(nodes))
             .links(links)
+            .on("tick", tick)
             .start();
 
         // -------------------------------
@@ -97,7 +94,6 @@
         link = link.data(force.links());
 
         // Remove any outgoing/old paths.
-        link.exit().remove();
 
         // Compute new attributes for entering and updating paths.
         link.enter().append("line")
@@ -105,43 +101,39 @@
             .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
             
 
+        link.exit().remove();
         // -------------------------------
 
         // Compute the data join. This returns the update selection.
-        circle = circle.data(force.nodes());
+        node = node.data(force.nodes());
+        var newnode = node
+          .enter().append("g")
+          .attr("class", "node")
+          .on("click", click)
+          .call(force.drag);
 
+        newnode.append("circle")
+          .attr("r", 29)
+          .attr("fill", "blue");
+        
+        newnode.append("text")
+          .attr("text-anchor", "middle")
+          .text(function(d) { return d.name; })
+          .attr("dy", ".20em")
+          .attr("class", "node_title");
+
+        node.exit().remove();
         // Add any incoming circles.
-        circle.enter().append("circle");
 
         // Remove any outgoing/old circles.
-        circle.exit().remove();
 
         // Compute new attributes for entering and updating circles.
-        circle
-            .attr("r", 39)
-            .attr("stroke", "black")
-            .attr("stroke-width", 1.5)
-            .on("click", click)
-            .call(force.drag);
 
         // -------------------------------
 
         // Compute the data join. This returns the update selection.
-        text = text.data(force.nodes());
-
-        // Add any incoming texts.
-        text.enter().append("text");
-
-        // Remove any outgoing/old texts.
-        text.exit().remove();
 
         // Compute new attributes for entering and updating texts.
-        text
-            .attr("text-anchor", "middle")
-            .text(function(d) { return d.name; });
-        body = body.data(force.nodes());
-        body.enter().append("text");
-        body.exit().remove();
 
     }
 
@@ -153,21 +145,15 @@
           .attr("y1", function(d) { return d.source.y; })
           .attr("x2", function(d) { return d.target.x; })
           .attr("y2", function(d) { return d.target.y; });
-        circle.attr("transform", transform);
-        text.attr("transform", transform);
+        node.attr("transform", transform);
     }
 
   function click(){
     
-    if (d3.select(this).attr("r") > 100) {
-      force
-        .gravity(0.1)
-        .linkDistance(150)
-        .charge(-600)
-        .start();
+    if (d3.select(this).select("circle").attr("r") > 100) {
       
       $(".addnode").removeClass("translate");
-      d3.select(this).transition()
+      d3.select(this).select("circle").transition()
         .duration(1000)
         .attr("r", function(d){
           if (d.weight == "1"){
@@ -216,7 +202,7 @@
         .style("font-size", "15px")
         .ease("elastic")
         .attr("dy",".20em");
-      d3.select(this).transition()
+      d3.select(this).select("circle").transition()
         .ease("elastic")
         .duration(2500)
         .attr("r", 250)
