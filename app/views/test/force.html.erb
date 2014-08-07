@@ -95,13 +95,12 @@
 
         // Remove any outgoing/old paths.
 
+        link.exit().remove();
         // Compute new attributes for entering and updating paths.
         link.enter().append("line")
-            .attr("class", function(d) { return "link " + d.type; })
-            .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
+            .attr("class", "link")
             
 
-        link.exit().remove();
         // -------------------------------
 
         // Compute the data join. This returns the update selection.
@@ -116,13 +115,9 @@
           .attr("r", 29)
           .attr("fill", "blue");
         
-        newnode.append("text")
-          .attr("text-anchor", "middle")
-          .text(function(d) { return d.name; })
-          .attr("dy", ".20em")
-          .attr("class", "node_title");
-
         node.exit().remove();
+
+
         // Add any incoming circles.
 
         // Remove any outgoing/old circles.
