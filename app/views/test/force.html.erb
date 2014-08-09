@@ -111,37 +111,26 @@
         circle = circle.data(force.nodes());
 
         // Add any incoming circles.
-        circle.enter().append("circle");
+        var newg = circle.enter().append("g").call(force.drag);
 
-        // Remove any outgoing/old circles.
+        var newnode = newg.append("circle");
         circle.exit().remove();
+        circle.select("text").remove();
+
+        var textnode = circle.append("text")
+          .text(function(d){ return d.name; });
+        // Remove any outgoing/old circles.
 
         // Compute new attributes for entering and updating circles.
-        circle
+        newnode
             .attr("r", 39)
             .attr("stroke", "black")
             .attr("stroke-width", 1.5)
-            .on("click", click)
-            .call(force.drag);
+            .on("click", click);
 
         // -------------------------------
 
         // Compute the data join. This returns the update selection.
-        text = text.data(force.nodes());
-
-        // Add any incoming texts.
-        text.enter().append("text");
-
-        // Remove any outgoing/old texts.
-        text.exit().remove();
-
-        // Compute new attributes for entering and updating texts.
-        text
-            .attr("text-anchor", "middle")
-            .text(function(d) { return d.name; });
-        body = body.data(force.nodes());
-        body.enter().append("text");
-        body.exit().remove();
 
     }
 
