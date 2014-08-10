@@ -23,10 +23,7 @@
         var dataset = <%= @nodes.to_json.html_safe %>
 
     var link = svg.append("g").selectAll(".link"),
-    circle = svg.append("g").selectAll("circle"),
-    text = svg.append("g").selectAll("text"),
-    body = svg.append("g").selectAll("text"),
-    marker = svg.append("defs").selectAll("marker");
+    node = svg.selectAll(".node");
 
     var nodes = {};
 
@@ -108,16 +105,19 @@
         // -------------------------------
 
         // Compute the data join. This returns the update selection.
-        circle = circle.data(force.nodes());
+        node = node.data(force.nodes());
 
         // Add any incoming circles.
-        var newg = circle.enter().append("g").call(force.drag);
+        var newg = node.enter().append("g")
+          .attr("class", "node")
+          .on("click", click)
+          .call(force.drag);
 
         var newnode = newg.append("circle");
-        circle.exit().remove();
-        circle.select("text").remove();
+        node.exit().remove();
+        node.select("text").remove();
 
-        var textnode = circle.append("text")
+        node.append("text")
           .text(function(d){ return d.name; });
         // Remove any outgoing/old circles.
 
@@ -125,8 +125,7 @@
         newnode
             .attr("r", 39)
             .attr("stroke", "black")
-            .attr("stroke-width", 1.5)
-            .on("click", click);
+            .attr("stroke-width", 1.5);
 
         // -------------------------------
 
@@ -142,13 +141,12 @@
           .attr("y1", function(d) { return d.source.y; })
           .attr("x2", function(d) { return d.target.x; })
           .attr("y2", function(d) { return d.target.y; });
-        circle.attr("transform", transform);
-        text.attr("transform", transform);
+        node.attr("transform", transform);
     }
 
   function click(){
     
-    if (d3.select(this).attr("r") > 100) {
+    if (d3.select(this).select("circle").attr("r") > 100) {
       force
         .gravity(0.1)
         .linkDistance(150)
@@ -156,7 +154,7 @@
         .start();
       
       $(".addnode").removeClass("translate");
-      d3.select(this).transition()
+      d3.select(this).select("circle").transition()
         .duration(1000)
         .attr("r", function(d){
           if (d.weight == "1"){
@@ -205,7 +203,7 @@
         .style("font-size", "15px")
         .ease("elastic")
         .attr("dy",".20em");
-      d3.select(this).transition()
+      d3.select(this).select("circle").transition()
         .ease("elastic")
         .duration(2500)
         .attr("r", 250)
