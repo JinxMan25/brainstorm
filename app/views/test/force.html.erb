@@ -127,6 +127,7 @@
         var newnode = newg.append("circle");
         node.exit().remove();
         node.select("text").remove();
+        node.select("text").remove();
 
         node.append("text")
           .attr("text-anchor", "middle")
@@ -134,6 +135,18 @@
           .attr("dy", ".20em")
           .attr("class", "node_title")
           .attr("font-size",12);
+
+        node.append("text")
+          .attr("text-anchor", "middle")
+          .attr("height", "10px")
+          .attr("width", "10px")
+          .text(function(d) { 
+            return d.body; 
+          })
+          .attr("dy", "-0.1em")
+          .attr("class","node_body")
+          .attr("font-size", 12)
+          .call(wrap,400);
 
         newnode
           .attr("r", function(d){
@@ -341,6 +354,30 @@
          });
     }
 }
+
+  function wrap (text, width) {
+    text.each(function() {
+      var text = d3.select(this),
+      words = text.text().split(/\s+/).reverse(),
+      word,
+      line = [],
+      lineNumber = 0,
+      lineHeight = 0.9, // ems
+      y = text.attr("y"),
+      dy = parseFloat(text.attr("dy")) || 0,
+      tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+      while (word = words.pop()) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        }
+      }
+    });
+  }
 
   $("circle").dblclick(function(){
     var node = $(this).data("name");
