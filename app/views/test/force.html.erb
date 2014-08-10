@@ -3,8 +3,19 @@
     <div id="update">
         <input name="updateButton" type="button" value="Update" onclick="newData()"/>
     </div>
+<h1 class="title"><%= @mindmap.mindmap_name %></h1>
+<div class="addnode">
+  <h2></h2>
+  <h3 id="target">
+    &#10095 Target(s)<span class="arrowright">&#10141</span><span class="target"></span>
+  </h3>
+  <h3 id="source">
+    &#10095 Source<span class="arrowright">&#10141</span><span class="source"></span>
+  </h3>
+</div>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
+
 
     var width = 960,
         height = 500;
@@ -45,14 +56,14 @@
         // Compute the distinct nodes from the links.
         links.forEach(function(link)
         {
-            link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, linkCount:0});    // initialize new nodes with zero links
+            link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.source_body, linkCount:0});    // initialize new nodes with zero links
             link.source.linkCount++;
                 // record this link on the source node, whether it was just initialized
                 // or already in the list, by incrementing the linkCount property
                 // (remember, link.source is just a reference to the node object in the
                 // nodes array, when you change its properties you change the node itself.)
 
-            link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, linkCount:0});    // initialize new nodes with zero links
+            link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body, linkCount:0});    // initialize new nodes with zero links
 
             link.target.linkCount++;
         });
@@ -330,4 +341,31 @@
          });
     }
 }
+
+  $("circle").dblclick(function(){
+    var node = $(this).data("name");
+    $(".addnode h2").text(node);
+    $(".addnode").addClass('translate');  
+  });
+
+  $("circle").hover(function(){
+    if($(this).data("target")){
+      var target = $(this).data("target");
+      $(".target").text(target);
+    } else {
+      $(".target").text("None");
+    }
+    if ($(this).data("source")) {
+      var source = $(this).data("source");
+      $(".source").text(source);
+    } else {
+      $(".source").text("self");
+    }
+    var node = $(this).data("name");
+    $(".addnode h2").text(node);
+    $(".addnode").addClass('translate');
+  },
+    function(){
+      $(".addnode").removeClass('translate');
+  });
     </script>
