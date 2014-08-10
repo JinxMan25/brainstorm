@@ -109,6 +109,8 @@
         var newg = node.enter().append("g")
           .attr("class", "node")
           .on("click", click)
+          .on("mouseover", mouseover)
+          .on("mouseout", mouseout)
           .call(force.drag);
 
         var newnode = newg.append("circle");
@@ -270,4 +272,62 @@
         return "translate(" + d.x + "," + d.y + ")";
     }
 
+  function mouseover() {
+
+    if (d3.select(this).select("circle").attr("r") < 100) {
+      d3.select(this).select("text").transition()
+        .style("font-size","25px")
+        .ease("elastic")
+        .duration(1000);
+      d3.select(this).select("circle").transition()
+          .ease("elastic")
+          .duration(1000)
+          .attr("r",function(d){
+            if (d.weight == "1") {
+              return 28*2;
+            } else if (d.weight == "2") {
+              return 17.5 * d.weight * 1.5;
+            } else if (d.weight == "3") {
+              return 13 * d.weight*1.5;
+            } else if (d.weight == "4") {
+              return 11 * d.weight*1.5;
+            } else if (d.weight == "5") {
+              return 10* d.weight*1.5;
+            } else if (d.weight == "6") {
+              return 7 * d.weight*1.5;
+            } else if (d.weight >= "7") {
+              return 5 * d.weight*1.5;
+            }
+          });
+    }
+  }
+
+  function mouseout() {
+    if( d3.select(this).select("circle").attr("r") < 90) {
+      d3.select(this).select("text").transition()
+        .style("font-size", "15px")
+        .ease("elastic")
+        .duration(750);
+      d3.select(this).select("circle").transition()
+        .ease("elastic")
+        .duration(750)
+        .attr("r",function(d){
+          if (d.weight == "1") {
+            return 28;
+          } else if (d.weight == "2") {
+            return 17.5 * d.weight;
+          } else if (d.weight == "3") {
+            return 13 * d.weight;
+          } else if (d.weight == "4") {
+            return 11 * d.weight;
+          } else if (d.weight == "5") {
+            return 10* d.weight;
+          } else if (d.weight == "6") {
+            return 7 * d.weight;
+          } else if (d.weight >= "7") {
+            return 6.5 * d.weight;
+          }
+         });
+    }
+}
     </script>
