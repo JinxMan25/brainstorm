@@ -105,17 +105,15 @@
 
         // Compute the data join. This returns the update selection.
         node = node.data(force.nodes());
-        var newnode = node
-          .enter().append("g")
+        // Add any incoming circles.
+        var newg = node.enter().append("g")
           .attr("class", "node")
           .on("click", click)
           .call(force.drag);
 
-        newnode.append("circle")
-          .attr("r", 29)
-          .attr("fill", "blue");
-        
+        var newnode = newg.append("circle");
         node.exit().remove();
+        node.select("text").remove();
 
         node.append("text")
           .attr("text-anchor", "middle")
@@ -123,15 +121,11 @@
           .attr("dy", ".20em")
           .attr("class", "node_title")
           .attr("font-size",12);
-        // Remove any outgoing/old circles.
 
-        // Compute new attributes for entering and updating circles.
-
-        // -------------------------------
-
-        // Compute the data join. This returns the update selection.
-
-        // Compute new attributes for entering and updating texts.
+        newnode
+            .attr("r", 39)
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5);
 
     }
 
@@ -150,6 +144,11 @@
   function click(){
     
     if (d3.select(this).select("circle").attr("r") > 100) {
+      force
+        .gravity(0.1)
+        .linkDistance(150)
+        .charge(-600)
+        .start();
       
       $(".addnode").removeClass("translate");
       d3.select(this).select("circle").transition()
