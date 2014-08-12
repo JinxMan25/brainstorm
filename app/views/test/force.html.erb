@@ -13,7 +13,7 @@
     &#10095 Source<span class="arrowright">&#10141</span><span class="source"></span>
   </h3>
 </div>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <%= javascript_include_tag "d3" %>
     <script>
 
 
@@ -56,16 +56,16 @@
         // Compute the distinct nodes from the links.
         links.forEach(function(link)
         {
-            link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.source_body, linkCount:0});    // initialize new nodes with zero links
-            link.source.linkCount++;
-                // record this link on the source node, whether it was just initialized
-                // or already in the list, by incrementing the linkCount property
-                // (remember, link.source is just a reference to the node object in the
-                // nodes array, when you change its properties you change the node itself.)
+          link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, target: link.target, body: link.source_body, linkCount:0, fixed: false});    // initialize new nodes with zero links
+          link.source.linkCount++;
+              // record this link on the source node, whether it was just initialized
+              // or already in the list, by incrementing the linkCount property
+              // (remember, link.source is just a reference to the node object in the
+              // nodes array, when you change its properties you change the node itself.)
 
-            link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body, linkCount:0});    // initialize new nodes with zero links
+          link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, source: link.source.name, body: link.target_body, linkCount:0, fixed: false});    // initialize new nodes with zero links
 
-            link.target.linkCount++;
+          link.target.linkCount++;
         });
 
         d3.keys(nodes).forEach(
@@ -86,7 +86,6 @@
                  }
              }
          );
-
         force
             .nodes(d3.values(nodes))
             .links(links)
@@ -178,11 +177,23 @@
             .attr("data-source", function(d){
                 return d.source;
           });
+            newnode.forEach(function(l){
+                debugger;
+            });
+  d3.select("circle")
+    .attr("r", 100)
+    .attr("x", "500")
+    .attr("y", "500")
+    .attr("id", "what");
+
+  d3.select("circle")[0][0].__data__.fixed = 3;
+  d3.select("circle")[0][0].__data__.px = 480;
+  d3.select("circle")[0][0].__data__.py = 250;
     }
 
+
     // Use elliptical arc path segments to doubly-encode directionality.
-    function tick()
-    {
+    function tick() {
         link
           .attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return d.source.y; })
@@ -192,7 +203,7 @@
     }
 
 
-  function click(){
+  function click() {
     
     if (d3.select(this).select("circle").attr("r") > 100) {
       force
@@ -385,24 +396,27 @@
     $(".addnode").addClass('translate');  
   });
 
-  $("circle").hover(function(){
-    if($(this).data("target")){
-      var target = $(this).data("target");
-      $(".target").text(target);
-    } else {
-      $(".target").text("None");
-    }
-    if ($(this).data("source")) {
-      var source = $(this).data("source");
-      $(".source").text(source);
-    } else {
-      $(".source").text("self");
-    }
-    var node = $(this).data("name");
-    $(".addnode h2").text(node);
-    $(".addnode").addClass('translate');
-  },
-    function(){
+  $("circle").on({
+    mouseenter: function() { 
+      if ($(this).data("target")) {
+        var target = $(this).data("target");
+          $(".target").text(target);
+        } else {
+          $(".target").text("None");
+        }
+        if ($(this).data("source")) {
+          var source = $(this).data("source");
+          $(".source").text(source);
+        } else {
+          $(".source").text("self");
+        }
+    
+      var node = $(this).data("name");
+      $(".addnode h2").text(node);
+      $(".addnode").addClass('translate');
+    },
+    mouseleave: function() {
       $(".addnode").removeClass('translate');
+                }
   });
     </script>
