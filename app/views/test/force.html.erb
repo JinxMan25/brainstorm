@@ -3,9 +3,10 @@
     <div id="update">
         <input name="updateButton" type="button" value="Update" onclick="newData()"/>
     </div>
-<h1 class="title"><%= @mindmap.mindmap_name %></h1>
 <div class="addnode">
   <h2></h2>
+  <svg>
+</svg>
   <h3 id="target">
     &#10095 Target(s)<span class="arrowright">&#10141</span><span class="target"></span>
   </h3>
@@ -30,10 +31,12 @@
         .attr("width", width)
         .attr("height", height);
 
-        var dataset = <%= @nodes.to_json.html_safe %>
+    var dataset = <%= @nodes.to_json.html_safe %>
 
     var link = svg.append("g").selectAll(".link"),
     node = svg.selectAll(".node");
+    svg.append("h1")
+      .datum(
 
     var nodes = {};
 
