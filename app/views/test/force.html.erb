@@ -31,14 +31,16 @@
         .attr("width", width)
         .attr("height", height);
 
+    svg.append("h1")
+      .attr("class", "title")
+      .datum(mindmap_title);
+
     var dataset = <%= @nodes.to_json.html_safe %>
    
-    var mindmap_title = <%= @mindmap.mindmap_name %>
+    var mindmap_title = <%= @mindmap.mindmap_name.to_json.html_safe %>
 
     var link = svg.append("g").selectAll(".link"),
     node = svg.selectAll(".node");
-    svg.append("h1")
-      .datum(mindmap_title)
 
     var nodes = {};
 
