@@ -186,7 +186,6 @@
     .attr("y", "500")
     .attr("id", "what");
 
-  d3.select("circle")[0][0].__data__.fixed = 3;
   d3.select("circle")[0][0].__data__.px = 480;
   d3.select("circle")[0][0].__data__.py = 250;
     }
@@ -204,8 +203,14 @@
 
 
   function click() {
+    if (d3.select(this).select("circle").attr("r") == 100){
+      d3.select(this).select("circle").transition()
+        .duration(500)
+        .ease("elastic")
+        .attr("r", 250);
+    }
     
-    if (d3.select(this).select("circle").attr("r") > 100) {
+    else if (d3.select(this).select("circle").attr("r") > 100) {
       force
         .gravity(0.1)
         .linkDistance(150)
@@ -301,6 +306,10 @@
         .attr("dy", "0px");
         
       }
+    d3.select("circle").transition()
+      .duration(750)
+      .attr("r", 100)
+
   }
     function transform(d)
     {
