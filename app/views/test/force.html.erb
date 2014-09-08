@@ -131,7 +131,6 @@
           .call(force.drag);
 
         var newnode = newg.append("circle");
-        node.exit().remove();
         node.select("text").remove();
         node.select("text").remove();
 
@@ -184,9 +183,8 @@
             .attr("data-source", function(d){
                 return d.source;
           });
-            newnode.forEach(function(l){
-                debugger;
-            });
+
+        node.exit().remove();
   d3.select("circle")
     .attr("r", 100)
     .attr("x", "500")
@@ -195,6 +193,7 @@
 
   d3.select("circle")[0][0].__data__.px = 480;
   d3.select("circle")[0][0].__data__.py = 250;
+
     }
 
 
