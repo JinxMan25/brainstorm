@@ -20,6 +20,6 @@ test:
 
 production:
   adapter: mysql2
-  database: db/production
+  database: brainstorm
   pool: 5
   timeout: 5000
