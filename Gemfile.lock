@@ -67,6 +67,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.10.1)
+    mysql2 (0.3.11)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-sftp (2.0.5)
@@ -142,6 +143,7 @@ DEPENDENCIES
   capistrano (~> 2.9.0)
   coffee-rails (~> 3.2.1)
   jquery-rails
+  mysql2
   pry-byebug
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
