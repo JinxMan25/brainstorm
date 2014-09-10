@@ -14,7 +14,6 @@ gem 'pry-byebug'
 # in production environments by default.
 group :assets do
   gem 'sass', '~> 3.3.7'
-  gem 'sprockets-rails', '~> 2.0.1'
   gem 'sass-rails',   '~> 4.0.1'
   gem 'coffee-rails', '~> 3.2.1'
 
