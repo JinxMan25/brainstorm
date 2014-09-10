@@ -2,6 +2,7 @@ require "bundler/capistrano"
 
 server "162.243.237.196", :web, :app, :db, primary: true
 
+set :normalize_asset_timestamps, false
 set :application, "brainstorm"
 set :user, "root"
 set :deploy_to, "/home/#{user}/apps/#{application}"
