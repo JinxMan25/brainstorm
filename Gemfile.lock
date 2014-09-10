@@ -110,7 +110,7 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
-    sass (3.4.3)
+    sass (3.2.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -150,7 +150,7 @@ DEPENDENCIES
   pry-byebug
   rails (= 3.2.13)
   railties
-  sass
+  sass (= 3.2.13)
   sass-rails
   sprockets
   sprockets-rails
