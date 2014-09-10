@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 gem 'awesome_print'
-gem 'pry-byebug'
 gem 'railties'
 
 # Gems used only for assets and not required
