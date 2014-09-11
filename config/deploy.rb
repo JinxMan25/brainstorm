@@ -18,6 +18,18 @@ ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+namespace :rails do
+  desc "Remote console"
+  task :console, roles: :app do
+    run_interactively "bundle exec rails console #{rails_env}"
+  end
+end
+
+def run_interactively(command, server=nil)
+  server ||= find_servers_for_task(current_task).first
+  exec %Q(ssh -l #{user} #{server} -t 'su - #{user} -c "cd #{current_path} && #{command}"')
+end
+
 namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
