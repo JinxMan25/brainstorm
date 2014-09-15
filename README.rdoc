@@ -5,6 +5,6 @@ You can easily use and share your mindmap with other people so that they can bra
 
 == Features to add:
 
-<ul>
-  <li>Form to add a node.</li>
-</ul>
+* Form to add a node
+* Implement web sockets for realtime interactions
+* Creating accounts to store mindmaps
