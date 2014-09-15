@@ -1,5 +1,5 @@
 == Brainstorm
 
 A mindmapping tool that allows people to brainstorm their ideas.
-Easy to use and share with other people to brainstorm with you!
+You can easily use and share your mindmap with other people so that they can brainstorm with you!
 
