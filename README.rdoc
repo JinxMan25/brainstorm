@@ -3,3 +3,8 @@
 A mindmapping tool that allows people to brainstorm their ideas.
 You can easily use and share your mindmap with other people so that they can brainstorm with you!
 
+== Features to add:
+
+<ul>
+  <li>Form to add a node.</li>
+</ul>
