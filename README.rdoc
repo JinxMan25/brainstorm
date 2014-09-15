@@ -7,4 +7,5 @@ You can easily use and share your mindmap with other people so that they can bra
 
 * Form to add a node
 * Implement web sockets for realtime interactions
-* Creating accounts to store mindmaps
+* User accounts to store mindmaps
+
